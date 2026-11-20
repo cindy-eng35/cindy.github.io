@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eaf6ff">
+<meta name="description" content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — References & Code.">
+<title>References & Code · BlueTrace OS Resource Study</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/results/results.js" defer></script>
+<script src="assets/navigation.js" defer></script>
+<script src="assets/report.js" defer></script>
+
+</head>
+<body data-page="references">
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
+<div class="app">
+<aside class="side" id="sidebar" aria-label="Report navigation" aria-hidden="false">
+  <div class="sidebar-top">
+  <a href="index.html" class="brand"><span class="logo" aria-hidden="true">✳</span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
+  <button class="menu-close" type="button" id="menuClose" aria-label="Close navigation">×</button>
+  </div>
+  <div class="nav-caption">TECHNICAL REPORT</div>
+  <nav aria-label="Report pages"><a class="nav-link" href="index.html" ><span class="nav-icon" aria-hidden="true">⌂</span> Introduction <span class="num">01</span></a>
+<a class="nav-link" href="dataset.html" ><span class="nav-icon" aria-hidden="true">▤</span> Dataset <span class="num">02</span></a>
+<a class="nav-link" href="methodology.html" ><span class="nav-icon" aria-hidden="true">☷</span> Methodology <span class="num">03</span></a>
+<a class="nav-link" href="results.html" ><span class="nav-icon" aria-hidden="true">▥</span> Results <span class="num">04</span></a>
+<a class="nav-link" href="discussion.html" ><span class="nav-icon" aria-hidden="true">◇</span> Discussion <span class="num">05</span></a>
+<a class="nav-link" href="conclusion.html" ><span class="nav-icon" aria-hidden="true">✧</span> Conclusion <span class="num">06</span></a>
+<a class="nav-link active" href="references.html" aria-current="page"><span class="nav-icon" aria-hidden="true">↗</span> References & Code <span class="num">07</span></a></nav>
+  <div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Week 1 · Site framework</span></div><p>Actual results will be published after processing the real dataset. No invented measurements.</p></div>
+</aside>
+<div class="main">
+<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button class="mobile-toggle" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS &nbsp;/&nbsp; <strong>REFERENCES & CODE</strong></div></div><div class="bar-right"><span class="pill">✳ Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" target="_blank" rel="noopener noreferrer">Official dataset ↗</a></div></header>
+<main class="container" id="main-content" tabindex="-1">
+<section class="page-section" id="references">
+<div class="headline"><div><span class="overline">07 / REFERENCES &amp; REPRODUCIBILITY</span><h2>Open methods. Clear sources.</h2><p>Source links, code dependencies, reproducibility steps and group contributions.</p></div></div>
+<div class="grid2"><article class="card"><span class="kicker">REFERENCES</span><h3>Primary sources</h3><div class="ref-list"><div class="ref-item"><b>Alibaba ClusterData repository</b><a href="https://github.com/alibaba/clusterdata" rel="noopener noreferrer" target="_blank">github.com/alibaba/clusterdata</a></div><div class="ref-item"><b>2017 trace documentation &amp; schema</b><a href="https://github.com/alibaba/clusterdata/blob/master/cluster-trace-v2017/trace_201708.md" rel="noopener noreferrer" target="_blank">trace_201708.md</a> · <a href="https://github.com/alibaba/clusterdata/blob/master/cluster-trace-v2017/schema.csv" rel="noopener noreferrer" target="_blank">schema.csv</a></div><div class="ref-item"><b>Analysis code</b><a href="analysis/analyze.py" target="_blank">analysis/analyze.py</a> (included in repository ZIP)</div></div></article><article class="card"><span class="kicker">REPRODUCIBILITY</span><h3>How to recreate the figures</h3><p>1. Obtain the official trace from Alibaba and document the selected file/subset.</p><p style="margin-top:8px">2. Install <code>requirements.txt</code>, run the analysis script, then publish the generated chart assets with this website.</p><pre class="code">pip install -r requirements.txt
+python analysis/analyze.py \
+  --input path/to/server_usage.csv</pre><p style="margin-top:9px">The script records selection rules, valid-row counts and figure metadata. Review all findings before presenting.</p></article></div>
+<div class="card" style="margin-top:17px"><span class="kicker">INDIVIDUAL CONTRIBUTION STATEMENT</span><h3>Who is responsible for what?</h3><p style="margin-bottom:16px">Replace A–F with member names and confirm each description before final submission; the instructor requires contribution statements for everyone.</p><div class="roles"><div class="role"><b>Member A</b>Source retrieval, data cleaning and preprocessing</div><div class="role"><b>Member B</b>Dataset schema, profiling and quality report</div><div class="role"><b>Member C</b>CPU utilization analysis and interpretation</div><div class="role"><b>Member D</b>Memory utilization and correlation analysis</div><div class="role"><b>Member E</b>Imbalance analysis and scheduling discussion</div><div class="role"><b>Member F</b>Website development, report integration and publishing</div></div></div>
+<div class="card" style="margin-top:17px"><span class="kicker">DELIVERABLE CHECKLIST</span><h3>Requirements before final submission</h3><ul class="list"><li>Public website URL that contains the complete technical report</li><li>Public code repository URL with README, dependencies and reproducible scripts</li><li>At least two testable research questions and three meaningful analyses</li><li>At least five real figures/tables, each with title, units and interpretive caption</li><li>Evidence-based OS explanation, uncertainty and limitations</li><li>8–10 minute group presentation and individual contribution statements</li></ul><p class="table-note"><b>Important:</b> This is a publication-ready Week 1 starter, not a completed report. Formal submission requirements are satisfied only after real team results and final documentation are added.</p></div>
+
+</section>
+<nav class="page-nav" aria-label="Report page navigation"><a href="conclusion.html">← Previous: Conclusion</a><span style="flex:1"></span><a href="index.html">Back to Introduction ↗</a></nav>
+</main>
+<footer class="page-footer"><span><span class="little-flower">✳</span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions.</span></footer>
+</div></div>
+</body></html>
