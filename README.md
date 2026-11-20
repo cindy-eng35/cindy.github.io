@@ -65,3 +65,11 @@ The teacher requires at least two testable research questions, three meaningful 
 - Shared `assets/style.css` is still included and is loaded after the fallback, so edits to the shared stylesheet take priority for deployed sites.
 - The analysis script and chart files still require the `assets` directory and should be uploaded together.
 - **Best practice:** unzip the entire ZIP, then open the `index.html` inside the extracted folder. Do not open the HTML preview directly inside the compressed ZIP.
+
+## V5 · Mist-blue color refresh
+
+- Updated from bright sky blue to a low-saturation mist-blue and blue-gray palette.
+- Kept seven independent pages, responsive layout, desktop sidebar, mobile hamburger menu, data import, and analysis/reproducibility files.
+- Each HTML page includes fallback CSS and navigation scripts; for complete navigation and figures, keep the extracted folder together.
+- To update GitHub Pages, replace the files in the repository while retaining the original folder hierarchy.
+
