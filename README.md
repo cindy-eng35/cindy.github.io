@@ -1,10 +1,10 @@
 # BlueTrace — Operating Systems (Topic 2)
 
-A **seven-page, responsive technical report starter** for the instructor's *CPU and Memory Resource Analysis in Real Computing Systems* topic. The source and publication structure follow the class project brief. This is a **Week 1 site framework**, not a completed data analysis.
+A **seven-page, responsive technical report starter (v4, CSS fallback fix)** for the instructor's *CPU and Memory Resource Analysis in Real Computing Systems* topic. The source and publication structure follow the class project brief. This is a **Week 1 site framework**, not a completed data analysis.
 
 ## Open locally
 
-Unzip the whole archive and open `index.html` in Chrome, Edge, or Safari. Do not open just the HTML without its `assets` folder; the CSS, mobile navigation, and plots live there.
+Unzip the whole archive and open `index.html` in Chrome, Edge, or Safari. Each HTML file now **embeds a backup copy of the CSS and mobile navigation**. This fixes the unstyled-text issue when just one HTML page is opened or CSS loading fails. For all seven pages, analysis charts, and editable shared styling, **keep the whole unzipped folder together**.
 
 - Desktop: permanent left navigation.
 - Tablet and mobile (900px and below): **☰ hamburger menu** in the top bar, with overlay and close × button.
@@ -57,3 +57,11 @@ On `results.html`, import a **small local subset** of `server_usage.csv` (up to 
 ## Original project requirements
 
 The teacher requires at least two testable research questions, three meaningful analyses/comparisons, at least five informative charts/tables with captions, evidence-based OS explanation, reproducibility steps, a public website and repository, an 8–10 minute group presentation, and individual contributions. **Do not treat page placeholders as finished work.**
+
+## v4 repair (November 2026)
+
+- The reported screenshot showed the browser's default serif fonts and blue underlined links: the relative `assets/style.css` file was not loaded.
+- All seven HTML pages now contain **embedded fallback CSS** and a **built-in mobile hamburger menu script** so they remain styled and usable if an individual HTML file is moved out of its folder.
+- Shared `assets/style.css` is still included and is loaded after the fallback, so edits to the shared stylesheet take priority for deployed sites.
+- The analysis script and chart files still require the `assets` directory and should be uploaded together.
+- **Best practice:** unzip the entire ZIP, then open the `index.html` inside the extracted folder. Do not open the HTML preview directly inside the compressed ZIP.
