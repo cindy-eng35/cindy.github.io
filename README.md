@@ -73,3 +73,21 @@ The teacher requires at least two testable research questions, three meaningful 
 - Each HTML page includes fallback CSS and navigation scripts; for complete navigation and figures, keep the extracted folder together.
 - To update GitHub Pages, replace the files in the repository while retaining the original folder hierarchy.
 
+
+
+## V6 visual update
+Replaced all green-rendering ✳ symbols with monochrome outline sparkles (✧) across all seven pages. No changes to page structure, scripts, or navigation.
+
+
+### V7 · iOS / mobile icon fix
+
+The decorative sparkle symbols were replaced by inline, monochrome SVGs across
+all seven HTML pages. On older iPhones, the former Unicode symbol could be
+rendered as a colored emoji. Vector icons now inherit the site’s blue color.
+External CSS/JS and internal page links include `?v=7` for cache invalidation.
+A subtle `v7` appears in the footer so the deployed revision is easy to verify.
+
+**To update GitHub Pages**: extract the ZIP, upload and commit the full contents
+(including all seven HTML files and `assets/`) to the publishing branch.
+Check the published site at `https://YOUR-SITE/?v=7`; if the footer doesn't say
+`v7`, the updated files are not yet being displayed (or the deployment is pending).
