@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eaf6ff">
-<meta name="description" content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Introduction.">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#eaf6ff" name="theme-color"/>
+<meta content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Introduction." name="description"/>
 <title>Introduction · BlueTrace OS Resource Study</title>
 <!-- CSS fallback: page is styled even when assets/style.css is missing or HTML is opened alone. -->
 <style>
@@ -227,61 +228,123 @@ a {color:#446F98}
 .discussion .card::after{content:none!important}
 
 .build-tag{color:#93A8BB;font-size:10px;letter-spacing:.02em;margin-left:5px}
-</style>
-<link rel="stylesheet" href="assets/style.css?v=7">
 
+/* V8 / authentic Week 1 dataset exploration. Maintains mist-blue identity. */
+.w1-divider{margin:26px 0 21px;height:1px;background:#dfebf3;border:0}
+.w1-banner{margin:18px 0 22px;border:1px solid #dce8f2;background:linear-gradient(108deg,#f5f9fc,#e7f0f8);border-radius:19px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.w1-banner strong{color:#3e5e7b;font-size:17px;display:block;margin-bottom:6px}
+.w1-banner p{font-size:12px;color:#73889b;margin:0;line-height:1.75}
+.w1-status{display:inline-flex;padding:6px 12px;border-radius:50px;border:1px solid #cfdeeb;background:#fff;color:#5c7b9c;font-size:10px;letter-spacing:.05em;font-weight:800;white-space:nowrap}
+.w1-section{margin-top:23px}.w1-section>h3{font-size:19px;letter-spacing:-.3px;color:#334f69;margin:2px 0 9px}
+.w1-section>p,.w1-text{color:#718496;font-size:12px;line-height:1.85;margin:4px 0 15px}
+.w1-statbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:17px 0 7px}
+.w1-stat{background:#fff;border:1px solid #e0eaf3;border-radius:16px;padding:15px 16px;min-width:0}
+.w1-stat b{display:block;color:#436f97;font-size:24px;line-height:1.25;letter-spacing:-.6px;font-variant-numeric:tabular-nums}
+.w1-stat small{display:block;color:#7b93a9;font-size:10px;margin-top:6px;line-height:1.6;font-weight:650}
+.w1-tablewrap{border:1px solid #e0eaf3;border-radius:15px;overflow-x:auto;background:#fff;margin:10px 0 8px}
+.w1-table{border-collapse:collapse;width:100%;font-size:12px;min-width:700px}
+.w1-table th{background:#f0f6fb;color:#5d7892;font-size:11px;text-align:left;white-space:nowrap;font-weight:800;padding:11px 13px;border-bottom:1px solid #dce8f2}
+.w1-table td{padding:11px 13px;color:#5c7185;border-bottom:1px solid #edf2f6;vertical-align:top;line-height:1.6}
+.w1-table tbody tr:last-child td{border-bottom:0}
+.w1-table td:first-child{font-weight:700;color:#3d5e7c}
+.w1-table td code{font-size:11px;background:#f2f7fa;padding:2px 4px;border-radius:4px;white-space:normal;overflow-wrap:anywhere}
+.w1-caption{font-size:11px;color:#8399ad;line-height:1.7;margin:4px 0 17px}
+.w1-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:17px 0}
+.w1-evidence figure{border:1px solid #e0eaf3;border-radius:17px;padding:13px;background:#fff;margin:0;min-width:0;box-shadow:0 8px 30px rgba(75,107,140,.035)}
+.w1-evidence figure:first-child{grid-column:1/-1}
+.w1-evidence img{display:block;width:100%;height:auto;border:1px solid #eef2f5;border-radius:10px;object-fit:contain;background:#fff}
+.w1-evidence figcaption{padding:10px 4px 0;color:#71889d;font-size:11px;line-height:1.7}
+.w1-evidence figcaption strong{color:#4c6b87}
+.w1-evidence a{display:block;cursor:zoom-in}
+.w1-callout{border-left:3px solid #9ab5cb;background:#f5f9fc;border-radius:0 12px 12px 0;padding:16px 18px;margin-top:17px;color:#637c93;font-size:12px;line-height:1.8}
+.w1-callout b{color:#405f7a}
+.w1-links{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 8px}
+.w1-links a{display:inline-flex;gap:6px;align-items:center;padding:9px 12px;border-radius:10px;background:#eff5fa;color:#52769a;border:1px solid #e0eaf3;font-size:11px;font-weight:750;text-decoration:none}
+.w1-links a:hover{background:#e1edf7}
+.w1-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:16px 0}
+.w1-steps>div{background:#fff;border:1px solid #e2ebf3;padding:15px;border-radius:14px}
+.w1-steps b{display:block;font-size:12px;color:#4a6d8e;margin:0 0 6px}.w1-steps p{font-size:11px;color:#8096ab;line-height:1.8;margin:0}
+.w1-inlinecode{display:block;overflow-x:auto;background:#eff5fa;border:1px solid #dae8f2;padding:13px 15px;border-radius:11px;color:#496b8b;font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+@media(max-width:740px){.w1-evidence{grid-template-columns:1fr}.w1-evidence figure:first-child{grid-column:auto}.w1-statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.w1-banner{padding:16px;align-items:flex-start;flex-direction:column}.w1-steps{grid-template-columns:1fr}.w1-stat b{font-size:20px}.w1-section>h3{font-size:17px}}
+@media(max-width:380px){.w1-statbar{gap:8px}.w1-stat{padding:12px}.w1-links a{width:100%}}
+
+
+.w1-swipe-hint{display:none;color:#86a0b4;font-size:11px;margin:8px 0 0}
+@media(max-width:740px){.w1-swipe-hint{display:block}}
+
+
+/* V9 original-file exhibits and supplementary findings */
+.member-evidence{grid-column:1 / -1}
+.member-evidence .figure-img{max-height:none;object-fit:contain;display:block}
+.member-evidence .figure-caption{font-size:12px;line-height:1.8}
+.evidence-link{display:inline-flex;margin-top:11px;font-size:12px;font-weight:700;color:var(--primary,#4d789d);text-decoration:none}
+.report-prose{font-size:13px;line-height:1.85;color:var(--muted,#617a94)}
+.report-prose + .report-prose{margin-top:10px}
+.v9-note{background:#F4F8FC;border:1px solid #DFE8F2;border-radius:15px;padding:14px 17px;margin-top:14px;font-size:12px;line-height:1.8;color:#56718d}
+.v9-note b{color:#344e6b}
+.v9-evidence-title{margin:25px 0 13px;font-size:15px;color:#2d4561}
+.v9-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.v9-kpis div{border:1px solid #E3ECF5;background:white;border-radius:15px;padding:15px}
+.v9-kpis b{display:block;font-size:22px;color:#40688c}
+.v9-kpis span{font-size:11px;color:#7e97ac}
+.v9-table th,.v9-table td{white-space:normal;min-width:125px}
+.v9-table td:first-child{font-weight:700}
+@media(max-width:620px){.v9-kpis{grid-template-columns:1fr 1fr}.member-evidence .figure-img{max-width:100%}}
+</style>
+<link href="assets/style.css?v=9" rel="stylesheet"/>
 </head>
-<body data-ui-version="7" data-page="introduction">
-<a href="#main-content" class="skip-link">Skip to content</a>
-<div class="scrim" id="scrim" aria-hidden="true"></div>
+<body data-page="introduction" data-ui-version="9">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div aria-hidden="true" class="scrim" id="scrim"></div>
 <div class="app">
-<aside class="side" id="sidebar" aria-label="Report navigation" aria-hidden="false">
-  <div class="sidebar-top">
-  <a href="index.html?v=7" class="brand"><span class="logo" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
-  <button class="menu-close" type="button" id="menuClose" aria-label="Close navigation">×</button>
-  </div>
-  <div class="nav-caption">TECHNICAL REPORT</div>
-  <nav aria-label="Report pages"><a class="nav-link active" href="index.html?v=7" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span> Introduction <span class="num">01</span></a>
-<a class="nav-link" href="dataset.html?v=7" ><span class="nav-icon" aria-hidden="true">▤</span> Dataset <span class="num">02</span></a>
-<a class="nav-link" href="methodology.html?v=7" ><span class="nav-icon" aria-hidden="true">☷</span> Methodology <span class="num">03</span></a>
-<a class="nav-link" href="results.html?v=7" ><span class="nav-icon" aria-hidden="true">▥</span> Results <span class="num">04</span></a>
-<a class="nav-link" href="discussion.html?v=7" ><span class="nav-icon" aria-hidden="true">◇</span> Discussion <span class="num">05</span></a>
-<a class="nav-link" href="conclusion.html?v=7" ><span class="nav-icon" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> Conclusion <span class="num">06</span></a>
-<a class="nav-link" href="references.html?v=7" ><span class="nav-icon" aria-hidden="true">↗</span> References & Code <span class="num">07</span></a></nav>
-  <div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Week 1 · Site framework</span></div><p>Actual results will be published after processing the real dataset. No invented measurements.</p></div>
+<aside aria-hidden="false" aria-label="Report navigation" class="side" id="sidebar">
+<div class="sidebar-top">
+<a class="brand" href="index.html?v=9"><span aria-hidden="true" class="logo"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
+<button aria-label="Close navigation" class="menu-close" id="menuClose" type="button">×</button>
+</div>
+<div class="nav-caption">TECHNICAL REPORT</div>
+<nav aria-label="Report pages"><a aria-current="page" class="nav-link active" href="index.html?v=9"><span aria-hidden="true" class="nav-icon">⌂</span> Introduction <span class="num">01</span></a>
+<a class="nav-link" href="dataset.html?v=9"><span aria-hidden="true" class="nav-icon">▤</span> Dataset <span class="num">02</span></a>
+<a class="nav-link" href="methodology.html?v=9"><span aria-hidden="true" class="nav-icon">☷</span> Methodology <span class="num">03</span></a>
+<a class="nav-link" href="results.html?v=9"><span aria-hidden="true" class="nav-icon">▥</span> Results <span class="num">04</span></a>
+<a class="nav-link" href="discussion.html?v=9"><span aria-hidden="true" class="nav-icon">◇</span> Discussion <span class="num">05</span></a>
+<a class="nav-link" href="conclusion.html?v=9"><span aria-hidden="true" class="nav-icon"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> Conclusion <span class="num">06</span></a>
+<a class="nav-link" href="references.html?v=9"><span aria-hidden="true" class="nav-icon">↗</span> References &amp; Code <span class="num">07</span></a></nav>
+<div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Task 1 verified · Task 4 figures added</span></div><p>Dataset profile updated: 187,963 rows retained. Original Task 4 figures 6–7 received. Task 2 charts and Task 3 original charts are still pending.</p></div>
 </aside>
 <div class="main">
-<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button class="mobile-toggle" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS &nbsp;/&nbsp; <strong>INTRODUCTION</strong></div></div><div class="bar-right"><span class="pill"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" target="_blank" rel="noopener noreferrer">Official dataset ↗</a></div></header>
+<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation menu" class="mobile-toggle" id="menuBtn" type="button"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS  /  <strong>INTRODUCTION</strong></div></div><div class="bar-right"><span class="pill"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Official dataset ↗</a></div></header>
 <main class="container" id="main-content" tabindex="-1">
 <section class="page-section" id="introduction">
-
 <div class="hero hero-v3">
 <div class="hero-copy">
-<span class="micro"><span aria-hidden="true" class="mini-sparkle"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> OPERATING SYSTEMS · TOPIC 2</span>
+<span class="micro"><span aria-hidden="true" class="mini-sparkle"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> OPERATING SYSTEMS · TOPIC 2</span>
 <h1>CPU &amp; Memory<br/><em>Resource Analysis.</em></h1>
 <p class="hero-subtitle">An evidence-based study of real computing systems using Alibaba Cluster Trace 2017. Explore resource demand, machine-level utilization and imbalance.</p>
-<p class="hero-quote">Every resource tells a story. <span aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span></p>
-<div class="actions"><a class="btn primary" href="dataset.html?v=7">Explore the dataset <span aria-hidden="true">↗</span></a><a class="text-action" href="results.html?v=7">View research results <span aria-hidden="true">→</span></a></div>
+<p class="hero-quote">Every resource tells a story. <span aria-hidden="true"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span></p>
+<div class="actions"><a class="btn primary" href="dataset.html?v=9">Explore the dataset <span aria-hidden="true">↗</span></a><a class="text-action" href="results.html?v=9">View research results <span aria-hidden="true">→</span></a></div>
 </div>
 <div aria-label="Project workflow illustration, not measured data" class="hero-process" role="img">
-<div class="process-top"><span class="process-orb"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span><span>RESEARCH WORKFLOW</span></div>
+<div class="process-top"><span class="process-orb"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span>RESEARCH WORKFLOW</span></div>
 <div class="process-step"><span class="process-index">01</span><span><b>Collect</b><small>Alibaba dataset</small></span><span class="step-symbol">↗</span></div>
 <div class="process-step"><span class="process-index">02</span><span><b>Analyze</b><small>CPU &amp; Memory</small></span><span class="step-symbol">↗</span></div>
-<div class="process-step"><span class="process-index">03</span><span><b>Interpret</b><small>OS resource management</small></span><span class="step-symbol"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span></div>
+<div class="process-step"><span class="process-index">03</span><span><b>Interpret</b><small>OS resource management</small></span><span class="step-symbol"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span></div>
 <span class="visual-note">Process illustration · not data</span>
 </div>
 </div>
-<div class="note-line"><span><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> This is a research-report website, not a real-time operating system monitor. Data-backed findings will appear after team analysis.</div>
+<div class="note-line"><span><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> Task 1 is documented; original Member E figures 6–7 are published, with other teammate figures pending.</div>
 <div class="headline"><div><span class="overline">01 / INTRODUCTION</span><h2>Studying real resource usage.</h2><p>Research motivation, objectives, testable questions and scope.</p></div><span class="pill">Topic 2</span></div>
 <div class="grid2"><article class="card"><span class="kicker">BACKGROUND &amp; OBJECTIVE</span><h3>Why CPU &amp; memory?</h3><p>CPU and memory demand varies across machines and time. Using real cluster-resource measurements, this study aims to describe usage patterns, identify imbalances, and discuss their implications for resource management and scheduling. Machine-level observations are distinguished from cluster-wide scheduling decisions.</p></article><article class="card"><span class="kicker">TESTABLE RESEARCH QUESTIONS</span><h3>What do we want to learn?</h3><div class="question"><span class="qnum">RQ1</span>How do CPU and memory utilization distributions differ across machines and time intervals?</div><div class="question"><span class="qnum">RQ2</span>What association exists between CPU and memory utilization, and which machines show mismatched demand?</div><div class="question"><span class="qnum">RQ3</span>How often do machines transition between low, medium and high utilization categories?</div></article></div>
 <div class="task-grid"><article class="task"><div class="task-icon">▤</div><b>Task 1 · Dataset</b><p>Schema, timestamps, completeness and quality.</p></article><article class="task"><div class="task-icon">▥</div><b>Task 2 · CPU</b><p>Histograms, trends and machine comparisons.</p></article><article class="task"><div class="task-icon">◉</div><b>Task 3 · Memory</b><p>Distributions, correlation and mismatches.</p></article><article class="task"><div class="task-icon">▦</div><b>Task 4 · Imbalance</b><p>Utilization groups, transitions and OS links.</p></article></div>
 <div class="headline" style="margin-top:30px"><div><span class="overline">PROJECT ROADMAP</span><h2>Four-week milestones.</h2></div></div><div class="timeline"><div class="week"><small>WEEK 01</small><strong>Prepare</strong><p>Confirm trace access, inspect schema, define questions.</p></div><div class="week"><small>WEEK 02</small><strong>Explore</strong><p>Clean data; create initial charts and scripts.</p></div><div class="week"><small>WEEK 03</small><strong>Interpret</strong><p>Compare results; connect to OS concepts.</p></div><div class="week"><small>WEEK 04</small><strong>Publish</strong><p>Test reproducibility; publish and present.</p></div></div>
+<div class="w1-section" id="w1-update"><div class="w1-banner"><div><strong>Week 1 update · Real dataset inspected</strong><p>Our team has verified Alibaba 2017 server usage records and completed the dataset schema, missing-value and sample-record check. The CPU, memory and imbalance comparisons remain under development.</p></div><span class="w1-status">W1 · TASK 1</span></div>
+<div class="w1-statbar"><div class="w1-stat"><b>187,963</b><small>Records inspected</small></div><div class="w1-stat"><b>1,310</b><small>Unique machines</small></div><div class="w1-stat"><b>8</b><small>Dataset fields</small></div><div class="w1-stat"><b>0.0005%</b><small>Rows incomplete</small></div></div>
+<div class="w1-links"><a href="dataset.html?v=9#w1-summary">Read verified dataset report →</a><a href="dataset.html?v=9#w1-evidence">View original notebook screenshots →</a></div></div>
 </section>
-<nav class="page-nav" aria-label="Report page navigation"><span style="flex:1"></span><a href="dataset.html?v=7">Next: Dataset →</a></nav>
+<nav aria-label="Report page navigation" class="page-nav"><span style="flex:1"></span><a href="dataset.html?v=9">Next: Dataset →</a></nav>
 </main>
-<footer class="page-footer"><span><span class="little-flower"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v7</span></span></footer>
+<footer class="page-footer"><span><span class="little-flower"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v9</span></span></footer>
 </div></div>
-
 <!-- Inline navigation fallback: hamburger menu still works if the assets folder is unavailable. -->
 <script>
 (() => {
@@ -331,7 +394,7 @@ a {color:#446F98}
 })();
 </script>
 <!-- Real data metadata is optional until analysis is completed. -->
-<script src="assets/results/results.js?v=7"></script>
+<script src="assets/results/results.js?v=9"></script>
 <script>
 (() => {
 'use strict';

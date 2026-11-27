@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eaf6ff">
-<meta name="description" content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Dataset.">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#eaf6ff" name="theme-color"/>
+<meta content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Dataset." name="description"/>
 <title>Dataset · BlueTrace OS Resource Study</title>
 <!-- CSS fallback: page is styled even when assets/style.css is missing or HTML is opened alone. -->
 <style>
@@ -227,44 +228,136 @@ a {color:#446F98}
 .discussion .card::after{content:none!important}
 
 .build-tag{color:#93A8BB;font-size:10px;letter-spacing:.02em;margin-left:5px}
-</style>
-<link rel="stylesheet" href="assets/style.css?v=7">
 
+/* V8 / authentic Week 1 dataset exploration. Maintains mist-blue identity. */
+.w1-divider{margin:26px 0 21px;height:1px;background:#dfebf3;border:0}
+.w1-banner{margin:18px 0 22px;border:1px solid #dce8f2;background:linear-gradient(108deg,#f5f9fc,#e7f0f8);border-radius:19px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.w1-banner strong{color:#3e5e7b;font-size:17px;display:block;margin-bottom:6px}
+.w1-banner p{font-size:12px;color:#73889b;margin:0;line-height:1.75}
+.w1-status{display:inline-flex;padding:6px 12px;border-radius:50px;border:1px solid #cfdeeb;background:#fff;color:#5c7b9c;font-size:10px;letter-spacing:.05em;font-weight:800;white-space:nowrap}
+.w1-section{margin-top:23px}.w1-section>h3{font-size:19px;letter-spacing:-.3px;color:#334f69;margin:2px 0 9px}
+.w1-section>p,.w1-text{color:#718496;font-size:12px;line-height:1.85;margin:4px 0 15px}
+.w1-statbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:17px 0 7px}
+.w1-stat{background:#fff;border:1px solid #e0eaf3;border-radius:16px;padding:15px 16px;min-width:0}
+.w1-stat b{display:block;color:#436f97;font-size:24px;line-height:1.25;letter-spacing:-.6px;font-variant-numeric:tabular-nums}
+.w1-stat small{display:block;color:#7b93a9;font-size:10px;margin-top:6px;line-height:1.6;font-weight:650}
+.w1-tablewrap{border:1px solid #e0eaf3;border-radius:15px;overflow-x:auto;background:#fff;margin:10px 0 8px}
+.w1-table{border-collapse:collapse;width:100%;font-size:12px;min-width:700px}
+.w1-table th{background:#f0f6fb;color:#5d7892;font-size:11px;text-align:left;white-space:nowrap;font-weight:800;padding:11px 13px;border-bottom:1px solid #dce8f2}
+.w1-table td{padding:11px 13px;color:#5c7185;border-bottom:1px solid #edf2f6;vertical-align:top;line-height:1.6}
+.w1-table tbody tr:last-child td{border-bottom:0}
+.w1-table td:first-child{font-weight:700;color:#3d5e7c}
+.w1-table td code{font-size:11px;background:#f2f7fa;padding:2px 4px;border-radius:4px;white-space:normal;overflow-wrap:anywhere}
+.w1-caption{font-size:11px;color:#8399ad;line-height:1.7;margin:4px 0 17px}
+.w1-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:17px 0}
+.w1-evidence figure{border:1px solid #e0eaf3;border-radius:17px;padding:13px;background:#fff;margin:0;min-width:0;box-shadow:0 8px 30px rgba(75,107,140,.035)}
+.w1-evidence figure:first-child{grid-column:1/-1}
+.w1-evidence img{display:block;width:100%;height:auto;border:1px solid #eef2f5;border-radius:10px;object-fit:contain;background:#fff}
+.w1-evidence figcaption{padding:10px 4px 0;color:#71889d;font-size:11px;line-height:1.7}
+.w1-evidence figcaption strong{color:#4c6b87}
+.w1-evidence a{display:block;cursor:zoom-in}
+.w1-callout{border-left:3px solid #9ab5cb;background:#f5f9fc;border-radius:0 12px 12px 0;padding:16px 18px;margin-top:17px;color:#637c93;font-size:12px;line-height:1.8}
+.w1-callout b{color:#405f7a}
+.w1-links{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 8px}
+.w1-links a{display:inline-flex;gap:6px;align-items:center;padding:9px 12px;border-radius:10px;background:#eff5fa;color:#52769a;border:1px solid #e0eaf3;font-size:11px;font-weight:750;text-decoration:none}
+.w1-links a:hover{background:#e1edf7}
+.w1-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:16px 0}
+.w1-steps>div{background:#fff;border:1px solid #e2ebf3;padding:15px;border-radius:14px}
+.w1-steps b{display:block;font-size:12px;color:#4a6d8e;margin:0 0 6px}.w1-steps p{font-size:11px;color:#8096ab;line-height:1.8;margin:0}
+.w1-inlinecode{display:block;overflow-x:auto;background:#eff5fa;border:1px solid #dae8f2;padding:13px 15px;border-radius:11px;color:#496b8b;font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+@media(max-width:740px){.w1-evidence{grid-template-columns:1fr}.w1-evidence figure:first-child{grid-column:auto}.w1-statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.w1-banner{padding:16px;align-items:flex-start;flex-direction:column}.w1-steps{grid-template-columns:1fr}.w1-stat b{font-size:20px}.w1-section>h3{font-size:17px}}
+@media(max-width:380px){.w1-statbar{gap:8px}.w1-stat{padding:12px}.w1-links a{width:100%}}
+
+
+.w1-swipe-hint{display:none;color:#86a0b4;font-size:11px;margin:8px 0 0}
+@media(max-width:740px){.w1-swipe-hint{display:block}}
+
+
+/* V9 original-file exhibits and supplementary findings */
+.member-evidence{grid-column:1 / -1}
+.member-evidence .figure-img{max-height:none;object-fit:contain;display:block}
+.member-evidence .figure-caption{font-size:12px;line-height:1.8}
+.evidence-link{display:inline-flex;margin-top:11px;font-size:12px;font-weight:700;color:var(--primary,#4d789d);text-decoration:none}
+.report-prose{font-size:13px;line-height:1.85;color:var(--muted,#617a94)}
+.report-prose + .report-prose{margin-top:10px}
+.v9-note{background:#F4F8FC;border:1px solid #DFE8F2;border-radius:15px;padding:14px 17px;margin-top:14px;font-size:12px;line-height:1.8;color:#56718d}
+.v9-note b{color:#344e6b}
+.v9-evidence-title{margin:25px 0 13px;font-size:15px;color:#2d4561}
+.v9-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.v9-kpis div{border:1px solid #E3ECF5;background:white;border-radius:15px;padding:15px}
+.v9-kpis b{display:block;font-size:22px;color:#40688c}
+.v9-kpis span{font-size:11px;color:#7e97ac}
+.v9-table th,.v9-table td{white-space:normal;min-width:125px}
+.v9-table td:first-child{font-weight:700}
+@media(max-width:620px){.v9-kpis{grid-template-columns:1fr 1fr}.member-evidence .figure-img{max-width:100%}}
+</style>
+<link href="assets/style.css?v=9" rel="stylesheet"/>
 </head>
-<body data-ui-version="7" data-page="dataset">
-<a href="#main-content" class="skip-link">Skip to content</a>
-<div class="scrim" id="scrim" aria-hidden="true"></div>
+<body data-page="dataset" data-ui-version="9">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div aria-hidden="true" class="scrim" id="scrim"></div>
 <div class="app">
-<aside class="side" id="sidebar" aria-label="Report navigation" aria-hidden="false">
-  <div class="sidebar-top">
-  <a href="index.html?v=7" class="brand"><span class="logo" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
-  <button class="menu-close" type="button" id="menuClose" aria-label="Close navigation">×</button>
-  </div>
-  <div class="nav-caption">TECHNICAL REPORT</div>
-  <nav aria-label="Report pages"><a class="nav-link" href="index.html?v=7" ><span class="nav-icon" aria-hidden="true">⌂</span> Introduction <span class="num">01</span></a>
-<a class="nav-link active" href="dataset.html?v=7" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span> Dataset <span class="num">02</span></a>
-<a class="nav-link" href="methodology.html?v=7" ><span class="nav-icon" aria-hidden="true">☷</span> Methodology <span class="num">03</span></a>
-<a class="nav-link" href="results.html?v=7" ><span class="nav-icon" aria-hidden="true">▥</span> Results <span class="num">04</span></a>
-<a class="nav-link" href="discussion.html?v=7" ><span class="nav-icon" aria-hidden="true">◇</span> Discussion <span class="num">05</span></a>
-<a class="nav-link" href="conclusion.html?v=7" ><span class="nav-icon" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> Conclusion <span class="num">06</span></a>
-<a class="nav-link" href="references.html?v=7" ><span class="nav-icon" aria-hidden="true">↗</span> References & Code <span class="num">07</span></a></nav>
-  <div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Week 1 · Site framework</span></div><p>Actual results will be published after processing the real dataset. No invented measurements.</p></div>
+<aside aria-hidden="false" aria-label="Report navigation" class="side" id="sidebar">
+<div class="sidebar-top">
+<a class="brand" href="index.html?v=9"><span aria-hidden="true" class="logo"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
+<button aria-label="Close navigation" class="menu-close" id="menuClose" type="button">×</button>
+</div>
+<div class="nav-caption">TECHNICAL REPORT</div>
+<nav aria-label="Report pages"><a class="nav-link" href="index.html?v=9"><span aria-hidden="true" class="nav-icon">⌂</span> Introduction <span class="num">01</span></a>
+<a aria-current="page" class="nav-link active" href="dataset.html?v=9"><span aria-hidden="true" class="nav-icon">▤</span> Dataset <span class="num">02</span></a>
+<a class="nav-link" href="methodology.html?v=9"><span aria-hidden="true" class="nav-icon">☷</span> Methodology <span class="num">03</span></a>
+<a class="nav-link" href="results.html?v=9"><span aria-hidden="true" class="nav-icon">▥</span> Results <span class="num">04</span></a>
+<a class="nav-link" href="discussion.html?v=9"><span aria-hidden="true" class="nav-icon">◇</span> Discussion <span class="num">05</span></a>
+<a class="nav-link" href="conclusion.html?v=9"><span aria-hidden="true" class="nav-icon"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> Conclusion <span class="num">06</span></a>
+<a class="nav-link" href="references.html?v=9"><span aria-hidden="true" class="nav-icon">↗</span> References &amp; Code <span class="num">07</span></a></nav>
+<div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Task 1 verified · Task 4 figures added</span></div><p>Dataset profile updated: 187,963 rows retained. Original Task 4 figures 6–7 received. Task 2 charts and Task 3 original charts are still pending.</p></div>
 </aside>
 <div class="main">
-<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button class="mobile-toggle" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS &nbsp;/&nbsp; <strong>DATASET</strong></div></div><div class="bar-right"><span class="pill"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" target="_blank" rel="noopener noreferrer">Official dataset ↗</a></div></header>
+<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation menu" class="mobile-toggle" id="menuBtn" type="button"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS  /  <strong>DATASET</strong></div></div><div class="bar-right"><span class="pill"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Official dataset ↗</a></div></header>
 <main class="container" id="main-content" tabindex="-1">
 <section class="page-section" id="dataset">
 <div class="headline"><div><span class="overline">02 / DATASET</span><h2>Getting to know the trace.</h2><p>Source, schema, selected subset, preprocessing and data-quality checks.</p></div><span class="pill">Task 1 · Team A + B</span></div>
-<div class="databox"><article class="card source"><span class="kicker">OFFICIAL SOURCE</span><h3>Alibaba Cluster Trace · 2017</h3><p>The instructor specifies Alibaba Cluster Trace 2017 for Topic 2. This project proposes using <code>server_usage.csv</code>, which records sampled machine-level CPU, memory, disk and Linux load-average measurements. Final subset choice and download verification: <strong>pending Team A</strong>.</p><a class="source-link" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Read the original dataset ↗</a></article><article class="card"><span class="kicker">DATASET SCOPE</span><h3>What needs to be documented?</h3><ul class="list"><li>Original source URL, version and file names</li><li>Exact selected machines, time span and sampling method</li><li>File-access verification and sample records</li><li>Missing values, duplicates and out-of-range usage</li><li>Cleaned-data transformations and limitations</li></ul><p class="table-note">The official trace includes a 12-hour disclosed resource-usage window. Exact final subset coverage must be checked from your files.</p></article></div>
-<div class="stat-grid"><div class="stat"><b id="stat-machines">—</b><span>MACHINES IN ANALYSIS</span></div><div class="stat"><b id="stat-records">—</b><span>VALID SAMPLE RECORDS</span></div><div class="stat"><b id="stat-cpu">—</b><span>MEAN CPU · %</span></div><div class="stat"><b id="stat-memory">—</b><span>MEAN MEMORY · %</span></div></div>
+<div class="databox"><article class="card source"><span class="kicker">OFFICIAL SOURCE</span><h3>Alibaba Cluster Trace · 2017</h3><p>The instructor specifies Alibaba Cluster Trace 2017 for Topic 2. This study uses <code>server_usage.csv</code>, which records sampled machine-level CPU, memory, disk and Linux load-average measurements. The supplied team notebook and CSV verify this selected trace and its schema. The original source is linked below.</p><a class="source-link" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Read the original dataset ↗</a></article><article class="card"><span class="kicker">DATASET SCOPE</span><h3>What needs to be documented?</h3><ul class="list"><li>Original source URL, version and file names</li><li>Exact selected machines, time span and sampling method</li><li>File-access verification and sample records</li><li>Missing values, duplicates and out-of-range usage</li><li>Cleaned-data transformations and limitations</li></ul><p class="table-note">This selection covers timestamps 39,600–82,500 s (an observed span of approximately 11.92 hours).</p></article></div>
+<div class="stat-grid"><div class="stat"><b id="stat-machines">1,310</b><span>MACHINES IN ANALYSIS</span></div><div class="stat"><b id="stat-records">187,963</b><span>RAW RECORDS CHECKED</span></div><div class="stat"><b id="stat-cpu">26.47%</b><span>MEAN CPU · %</span></div><div class="stat"><b id="stat-memory">48.95%</b><span>MEAN MEMORY · %</span></div></div>
 <div class="card"><span class="kicker">SCHEMA / 2017 SERVER USAGE</span><h3>Eight fields to inspect</h3><div class="scroll"><table class="schema"><thead><tr><th>Column (schema)</th><th>Meaning</th><th>Analytical use</th></tr></thead><tbody><tr><td>timestamp</td><td>Seconds relative to trace start</td><td>Time coverage; time series</td></tr><tr><td>machineID</td><td>Machine identifier</td><td>Between-machine comparisons</td></tr><tr><td>util:CPU</td><td>Machine CPU utilization (0–100 scale)</td><td>CPU distribution and trends</td></tr><tr><td>util:memory</td><td>Machine memory utilization (0–100 scale)</td><td>Memory distribution and trends</td></tr><tr><td>util:disk</td><td>Machine disk utilization</td><td>Context, optional</td></tr><tr><td>load1</td><td>Linux 1-minute load average</td><td>Supplementary OS interpretation</td></tr><tr><td>load5</td><td>Linux 5-minute load average</td><td>Supplementary OS interpretation</td></tr><tr><td>load15</td><td>Linux 15-minute load average</td><td>Supplementary OS interpretation</td></tr></tbody></table></div><p class="table-note">Field order follows Alibaba's 2017 schema. Source CSV files are headerless. Utilization is on a 0–100 scale; load average is a separate, non-percent metric.</p></div>
-<div class="grid2" style="margin-top:16px"><article class="card"><span class="kicker">QUALITY CHECKS</span><h3>Data quality report</h3><p id="quality-summary">Awaiting real dataset verification. Record missing/invalid measurements, duplicate rows, the observed time range and the cleaning rules before publishing results.</p></article><article class="card"><span class="kicker">REPRODUCIBLE INPUT</span><h3>Sample records and selection</h3><p id="selection-summary">No official sample has been processed yet. Team A should document the input filename, selected subset, cleaning criteria and sampling strategy used for the final report.</p></article></div>
-</section>
-<nav class="page-nav" aria-label="Report page navigation"><a href="index.html?v=7">← Previous: Introduction</a><span style="flex:1"></span><a href="methodology.html?v=7">Next: Methodology →</a></nav>
-</main>
-<footer class="page-footer"><span><span class="little-flower"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v7</span></span></footer>
+<div class="grid2" style="margin-top:16px"><article class="card"><span class="kicker">QUALITY CHECKS</span><h3>Data quality report</h3><p id="quality-summary">187,963 records retained; 1 row with five missing measurements, zero duplicate rows or machine/time pairs; 669 per-machine gaps above 300 seconds (667 × 600 s, 2 × 1,800 s).</p></article><article class="card"><span class="kicker">REPRODUCIBLE INPUT</span><h3>Sample records and selection</h3><p id="selection-summary">The standard column names and full 187,963-row file are retained; 187,962 rows have paired valid CPU and memory measurements. Complete-case filtering is applied only when required by a particular analysis.</p></article></div>
+<div class="w1-banner" role="note"><div><strong>Week 1 · Dataset Exploration is now documented</strong><p>Updated Task 1 tables use the team-provided research summary and verified 187,963-row normalized CSV. The original screenshots remain unchanged as evidence of the exploratory notebook.</p></div><span class="w1-status">TASK 1 · EVIDENCE AVAILABLE</span></div>
+<div class="w1-statbar">
+<div class="w1-stat"><b>187,963</b><small>Input and retained records</small></div>
+<div class="w1-stat"><b>1,310</b><small>Distinct machines</small></div>
+<div class="w1-stat"><b>11.92 h</b><small>Observed time span</small></div>
+<div class="w1-stat"><b>1 row</b><small>With missing measurements</small></div>
+</div>
+<div class="w1-section" id="w1-summary"><span class="kicker">TABLE 01 / UPDATED DATA-QUALITY REPORT</span><h3>Dataset Summary &amp; Data-Quality Report (server_usage.csv)</h3>
+<p class="report-prose">All 187,963 normalized records are retained; measurements with missing values are excluded only for analyses that require them. Sampling intervals are checked within each machine's ordered observations.</p>
+<p class="w1-swipe-hint">On phones, swipe left to see all columns →</p><div class="w1-tablewrap"><table class="w1-table v9-table"><thead><tr><th scope="col">Metric</th><th scope="col">Value / Details</th><th scope="col">Unit / Notes</th></tr></thead><tbody><tr><td>Total Records (Input / Retained)</td><td>187,963 / 187,963</td><td>Rows (0 rows dropped in preprocessing)</td></tr><tr><td>Total Features</td><td>8</td><td>Standardized columns</td></tr><tr><td>Unique Machines</td><td>1,310</td><td>Machine IDs range from 1 to 1,313</td></tr><tr><td>Time Coverage</td><td>39,600 – 82,500</td><td>Seconds (42,900 s span / ~11.92 hours)</td></tr><tr><td>Sampling Interval &amp; Gaps</td><td>300 s baseline; 669 gaps</td><td>667 gaps of 600 s; 2 gaps of 1,800 s</td></tr><tr><td>Missing Values</td><td>1 record (0.00053%)</td><td>Missing in CPU, disk, and load fields; 0 in memory</td></tr><tr><td>Duplicate Records</td><td>0</td><td>Exact and same-machine/timestamp duplicates</td></tr><tr><td>Valid Paired Observations</td><td>187,962</td><td>Records with both valid cpu_util and mem_util</td></tr><tr><td>CPU Utilization (cpu_util)</td><td>Mean: 26.47% (SD: 10.66%)</td><td>Range: 0.50% – 89.72%</td></tr><tr><td>Memory Utilization (mem_util)</td><td>Mean: 48.95% (SD: 13.19%)</td><td>Range: 2.30% – 95.42%</td></tr><tr><td>Disk Utilization (disk_util)</td><td>Mean: 47.08% (SD: 9.10%)</td><td>Range: 27.40% – 96.82%</td></tr><tr><td>Linux Load Avg (1m / 5m / 15m)</td><td>Mean: 18.47 / 18.08 / 17.08</td><td>Max: 132.08 / 128.60 / 122.76</td></tr></tbody></table></div>
+<div class="v9-note"><b>Technical Interpretation</b><p class="report-prose">The server_usage.csv trace captures 187,963 machine-level observations across 1,310 production servers over an 11.92-hour window (timestamps 39,600 to 82,500 seconds). Overall data integrity is exceptionally high, with zero duplicate entries and only a single incomplete record (0.00053% missing rate) in the CPU, disk, and load-average fields. Rather than dropping this row globally during preprocessing, all 187,963 records are retained and missing values are filtered at analysis time, yielding 187,962 valid CPU–memory paired observations. Across the cluster, all CPU (0.50%–89.72%) and memory (2.30%–95.42%) measurements fall within valid bounds, and average memory utilization (48.95%) is substantially higher than average CPU utilization (26.47%), indicating potential CPU–memory resource imbalance. Finally, continuity checks against the 300-second baseline interval reveal 669 potential reporting gaps (667 of 600 s and 2 of 1,800 s), which should be considered when interpreting short-term temporal fluctuations.</p></div>
+<p class="w1-caption">Source: updated Member B Task 1 summary; row counts, missingness, duplicates and per-machine sampling gaps cross-checked with the uploaded cleaned_server_usage.csv.</p></div>
+<div class="w1-section" id="w1-schema"><span class="kicker">TABLE 02 / RAW → STANDARDIZED</span><h3>Schema Summary (server_usage.csv → cleaned_server_usage.csv)</h3>
+<p class="report-prose">The official source uses longer field names. The team normalizes these names while retaining the eight measurement fields.</p>
+<p class="w1-swipe-hint">On phones, swipe left to see all columns →</p><div class="w1-tablewrap"><table class="w1-table v9-table"><thead><tr><th scope="col">Field #</th><th scope="col">Original Column Name</th><th scope="col">Standardized Name</th><th scope="col">Data Type</th><th scope="col">Mandatory</th><th scope="col">Unit / Description</th></tr></thead><tbody><tr><td>1</td><td>timestamp</td><td>timestamp</td><td>INTEGER</td><td>YES</td><td>Seconds (relative trace time)</td></tr><tr><td>2</td><td>machine id</td><td>machine_id</td><td>INTEGER</td><td>YES</td><td>Anonymized machine ID (1 – 1,313)</td></tr><tr><td>3</td><td>used percent of cpus(%)</td><td>cpu_util</td><td>FLOAT</td><td>YES</td><td>Percentage (%) of CPU utilized</td></tr><tr><td>4</td><td>used percent of memory(%)</td><td>mem_util</td><td>FLOAT</td><td>YES</td><td>Percentage (%) of memory utilized</td></tr><tr><td>5</td><td>used percent of disk space(%)</td><td>disk_util</td><td>FLOAT</td><td>YES</td><td>Percentage (%) of disk space utilized</td></tr><tr><td>6</td><td>linux cpu load average of 1 minute</td><td>load1</td><td>FLOAT</td><td>YES</td><td>1-minute Linux system load average</td></tr><tr><td>7</td><td>linux cpu load average of 5 minute</td><td>load5</td><td>FLOAT</td><td>YES</td><td>5-minute Linux system load average</td></tr><tr><td>8</td><td>linux cpu load average of 15 minute</td><td>load15</td><td>FLOAT</td><td>YES</td><td>15-minute Linux system load average</td></tr></tbody></table></div>
+<p class="w1-caption">Linux load averages describe average system load, not a percentage. Mandatory in the source schema does not imply every captured row is complete.</p></div>
+<div class="w1-section" id="w1-samples"><span class="kicker">TABLE 03 / ORIGINAL RECORDS</span><h3>Representative Sample Records</h3>
+<p class="report-prose">The first five recorded rows of server_usage.csv; sample order is preserved, not sorted.</p>
+<p class="w1-swipe-hint">On phones, swipe left to see all columns →</p><div class="w1-tablewrap"><table class="w1-table v9-table"><thead><tr><th scope="col">timestamp (s)</th><th scope="col">machine_id</th><th scope="col">cpu_util (%)</th><th scope="col">mem_util (%)</th><th scope="col">disk_util (%)</th><th scope="col">load1</th><th scope="col">load5</th><th scope="col">load15</th></tr></thead><tbody><tr><td>41700</td><td>237</td><td>23.38</td><td>30.08</td><td>42.20</td><td>15.82</td><td>13.86</td><td>12.64</td></tr><tr><td>39600</td><td>265</td><td>26.36</td><td>29.54</td><td>57.60</td><td>17.46</td><td>18.90</td><td>16.70</td></tr><tr><td>42600</td><td>770</td><td>49.14</td><td>60.10</td><td>41.86</td><td>33.20</td><td>31.22</td><td>30.52</td></tr><tr><td>40800</td><td>776</td><td>33.24</td><td>47.52</td><td>43.60</td><td>21.84</td><td>22.10</td><td>24.02</td></tr><tr><td>42900</td><td>393</td><td>45.72</td><td>58.72</td><td>42.00</td><td>34.10</td><td>36.24</td><td>36.92</td></tr></tbody></table></div>
+<p class="w1-caption">(Source: First 5 rows of server_usage.csv.)</p></div>
+<div class="w1-section" id="w1-quality"><span class="kicker">QUALITY &amp; PREPARATION</span><h3>Preserve all observations; filter only for analysis</h3>
+<div class="w1-callout"><b>Updated Task 1 preprocessing policy:</b> all <strong>187,963</strong> input records are retained in <code>cleaned_server_usage.csv</code>. The single partially missing row is not dropped globally. CPU–Memory paired computations use <strong>187,962</strong> valid pairs (pairwise complete observations). No filling, rounding, or fabricated measurements were applied. Each machine's consecutive timestamps were checked against the 300-second baseline, identifying 667 intervals of 600 seconds and two of 1,800 seconds.</div>
+<div class="w1-steps"><div><b>01 · Obtain</b><p>Use the Alibaba Cluster Trace 2017 source and record the exact dataset version and files.</p></div><div><b>02 · Inspect</b><p>Run <code>01_dataset_exploration.ipynb</code> to inspect schema, row counts, timestamps, nulls, duplicate rows and basic statistics.</p></div><div><b>03 · Validate</b><p>The original row count is preserved in the normalized file. Missingness is handled by analysis-specific filtering (pairwise complete observations for CPU versus memory).</p></div></div>
+<div class="w1-links"><a href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Official data source ↗</a><a download="" href="analysis/01_dataset_exploration.ipynb">Download Task 1 notebook ↓</a><a download="" href="analysis/prepare_server_usage.py">Preprocessing script ↓</a><a download="" href="data/cleaned_server_usage.csv">Retained cleaned CSV (187,963 rows) ↓</a></div>
+<p class="w1-caption">W1 deliverable: accessible dataset, schema inspection, research questions and data-quality findings. Detailed preprocessing and comparative charts proceed in W2–W3. Source-download and raw-data access are described in the official repository.</p></div>
+<div class="w1-section" id="w1-evidence"><span class="kicker">NOTEBOOK OUTPUT / ORIGINAL EVIDENCE</span><h3>Jupyter screenshots</h3><p>The three screenshots provided by the team are included directly below. Click an image to open its full-size version.</p>
+<div class="w1-evidence">
+<figure><a href="assets/w1/schema_quality.png" rel="noopener noreferrer" target="_blank"><img alt="Notebook screenshot showing official server usage schema, dataset size, missing-value counts and basic statistics" loading="lazy" src="assets/w1/schema_quality.png"/></a><figcaption><strong>Screenshot 01 · Schema &amp; data quality.</strong> Original schema, 187,963 records, 1,310 machines and missing-value report.</figcaption></figure>
+<figure><a href="assets/w1/statistics.jpg" rel="noopener noreferrer" target="_blank"><img alt="Notebook descriptive statistics for memory, disk utilization and Linux load averages" loading="lazy" src="assets/w1/statistics.jpg"/></a><figcaption><strong>Screenshot 02 · Descriptive statistics.</strong> Memory / disk distributions and 1-, 5-, 15-minute load averages.</figcaption></figure>
+<figure><a href="assets/w1/sample_records.png" rel="noopener noreferrer" target="_blank"><img alt="Notebook printout showing the first five rows of machine resource metrics" loading="lazy" src="assets/w1/sample_records.png"/></a><figcaption><strong>Screenshot 03 · Sample records.</strong> Five observed records with CPU, memory, disk and load averages.</figcaption></figure>
 </div></div>
-
+<div class="w1-callout"><b>Technical interpretation · W1:</b> Mean memory utilization (48.95%) exceeds mean CPU utilization (26.47%) by about 22.48 percentage points in this trace. This motivates investigating CPU–memory mismatches in Task 3; the difference in overall means alone does <strong>not</strong> prove per-machine resource imbalance, causation or poor application performance.</div>
+</section>
+<nav aria-label="Report page navigation" class="page-nav"><a href="index.html?v=9">← Previous: Introduction</a><span style="flex:1"></span><a href="methodology.html?v=9">Next: Methodology →</a></nav>
+</main>
+<footer class="page-footer"><span><span class="little-flower"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v9</span></span></footer>
+</div></div>
 <!-- Inline navigation fallback: hamburger menu still works if the assets folder is unavailable. -->
 <script>
 (() => {
@@ -314,7 +407,7 @@ a {color:#446F98}
 })();
 </script>
 <!-- Real data metadata is optional until analysis is completed. -->
-<script src="assets/results/results.js?v=7"></script>
+<script src="assets/results/results.js?v=9"></script>
 <script>
 (() => {
 'use strict';

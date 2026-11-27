@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eaf6ff">
-<meta name="description" content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Results.">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#eaf6ff" name="theme-color"/>
+<meta content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Results." name="description"/>
 <title>Results · BlueTrace OS Resource Study</title>
 <!-- CSS fallback: page is styled even when assets/style.css is missing or HTML is opened alone. -->
 <style>
@@ -227,50 +228,114 @@ a {color:#446F98}
 .discussion .card::after{content:none!important}
 
 .build-tag{color:#93A8BB;font-size:10px;letter-spacing:.02em;margin-left:5px}
+
+/* V8 / authentic Week 1 dataset exploration. Maintains mist-blue identity. */
+.w1-divider{margin:26px 0 21px;height:1px;background:#dfebf3;border:0}
+.w1-banner{margin:18px 0 22px;border:1px solid #dce8f2;background:linear-gradient(108deg,#f5f9fc,#e7f0f8);border-radius:19px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.w1-banner strong{color:#3e5e7b;font-size:17px;display:block;margin-bottom:6px}
+.w1-banner p{font-size:12px;color:#73889b;margin:0;line-height:1.75}
+.w1-status{display:inline-flex;padding:6px 12px;border-radius:50px;border:1px solid #cfdeeb;background:#fff;color:#5c7b9c;font-size:10px;letter-spacing:.05em;font-weight:800;white-space:nowrap}
+.w1-section{margin-top:23px}.w1-section>h3{font-size:19px;letter-spacing:-.3px;color:#334f69;margin:2px 0 9px}
+.w1-section>p,.w1-text{color:#718496;font-size:12px;line-height:1.85;margin:4px 0 15px}
+.w1-statbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:17px 0 7px}
+.w1-stat{background:#fff;border:1px solid #e0eaf3;border-radius:16px;padding:15px 16px;min-width:0}
+.w1-stat b{display:block;color:#436f97;font-size:24px;line-height:1.25;letter-spacing:-.6px;font-variant-numeric:tabular-nums}
+.w1-stat small{display:block;color:#7b93a9;font-size:10px;margin-top:6px;line-height:1.6;font-weight:650}
+.w1-tablewrap{border:1px solid #e0eaf3;border-radius:15px;overflow-x:auto;background:#fff;margin:10px 0 8px}
+.w1-table{border-collapse:collapse;width:100%;font-size:12px;min-width:700px}
+.w1-table th{background:#f0f6fb;color:#5d7892;font-size:11px;text-align:left;white-space:nowrap;font-weight:800;padding:11px 13px;border-bottom:1px solid #dce8f2}
+.w1-table td{padding:11px 13px;color:#5c7185;border-bottom:1px solid #edf2f6;vertical-align:top;line-height:1.6}
+.w1-table tbody tr:last-child td{border-bottom:0}
+.w1-table td:first-child{font-weight:700;color:#3d5e7c}
+.w1-table td code{font-size:11px;background:#f2f7fa;padding:2px 4px;border-radius:4px;white-space:normal;overflow-wrap:anywhere}
+.w1-caption{font-size:11px;color:#8399ad;line-height:1.7;margin:4px 0 17px}
+.w1-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:17px 0}
+.w1-evidence figure{border:1px solid #e0eaf3;border-radius:17px;padding:13px;background:#fff;margin:0;min-width:0;box-shadow:0 8px 30px rgba(75,107,140,.035)}
+.w1-evidence figure:first-child{grid-column:1/-1}
+.w1-evidence img{display:block;width:100%;height:auto;border:1px solid #eef2f5;border-radius:10px;object-fit:contain;background:#fff}
+.w1-evidence figcaption{padding:10px 4px 0;color:#71889d;font-size:11px;line-height:1.7}
+.w1-evidence figcaption strong{color:#4c6b87}
+.w1-evidence a{display:block;cursor:zoom-in}
+.w1-callout{border-left:3px solid #9ab5cb;background:#f5f9fc;border-radius:0 12px 12px 0;padding:16px 18px;margin-top:17px;color:#637c93;font-size:12px;line-height:1.8}
+.w1-callout b{color:#405f7a}
+.w1-links{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 8px}
+.w1-links a{display:inline-flex;gap:6px;align-items:center;padding:9px 12px;border-radius:10px;background:#eff5fa;color:#52769a;border:1px solid #e0eaf3;font-size:11px;font-weight:750;text-decoration:none}
+.w1-links a:hover{background:#e1edf7}
+.w1-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:16px 0}
+.w1-steps>div{background:#fff;border:1px solid #e2ebf3;padding:15px;border-radius:14px}
+.w1-steps b{display:block;font-size:12px;color:#4a6d8e;margin:0 0 6px}.w1-steps p{font-size:11px;color:#8096ab;line-height:1.8;margin:0}
+.w1-inlinecode{display:block;overflow-x:auto;background:#eff5fa;border:1px solid #dae8f2;padding:13px 15px;border-radius:11px;color:#496b8b;font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+@media(max-width:740px){.w1-evidence{grid-template-columns:1fr}.w1-evidence figure:first-child{grid-column:auto}.w1-statbar{grid-template-columns:repeat(2,minmax(0,1fr))}.w1-banner{padding:16px;align-items:flex-start;flex-direction:column}.w1-steps{grid-template-columns:1fr}.w1-stat b{font-size:20px}.w1-section>h3{font-size:17px}}
+@media(max-width:380px){.w1-statbar{gap:8px}.w1-stat{padding:12px}.w1-links a{width:100%}}
+
+
+.w1-swipe-hint{display:none;color:#86a0b4;font-size:11px;margin:8px 0 0}
+@media(max-width:740px){.w1-swipe-hint{display:block}}
+
+
+/* V9 original-file exhibits and supplementary findings */
+.member-evidence{grid-column:1 / -1}
+.member-evidence .figure-img{max-height:none;object-fit:contain;display:block}
+.member-evidence .figure-caption{font-size:12px;line-height:1.8}
+.evidence-link{display:inline-flex;margin-top:11px;font-size:12px;font-weight:700;color:var(--primary,#4d789d);text-decoration:none}
+.report-prose{font-size:13px;line-height:1.85;color:var(--muted,#617a94)}
+.report-prose + .report-prose{margin-top:10px}
+.v9-note{background:#F4F8FC;border:1px solid #DFE8F2;border-radius:15px;padding:14px 17px;margin-top:14px;font-size:12px;line-height:1.8;color:#56718d}
+.v9-note b{color:#344e6b}
+.v9-evidence-title{margin:25px 0 13px;font-size:15px;color:#2d4561}
+.v9-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.v9-kpis div{border:1px solid #E3ECF5;background:white;border-radius:15px;padding:15px}
+.v9-kpis b{display:block;font-size:22px;color:#40688c}
+.v9-kpis span{font-size:11px;color:#7e97ac}
+.v9-table th,.v9-table td{white-space:normal;min-width:125px}
+.v9-table td:first-child{font-weight:700}
+@media(max-width:620px){.v9-kpis{grid-template-columns:1fr 1fr}.member-evidence .figure-img{max-width:100%}}
 </style>
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link href="assets/style.css?v=9" rel="stylesheet"/>
 </head>
-<body data-ui-version="7" data-page="results">
-<a href="#main-content" class="skip-link">Skip to content</a>
-<div class="scrim" id="scrim" aria-hidden="true"></div>
+<body data-page="results" data-ui-version="9">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div aria-hidden="true" class="scrim" id="scrim"></div>
 <div class="app">
-<aside class="side" id="sidebar" aria-label="Report navigation" aria-hidden="false">
-  <div class="sidebar-top">
-  <a href="index.html?v=7" class="brand"><span class="logo" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
-  <button class="menu-close" type="button" id="menuClose" aria-label="Close navigation">×</button>
-  </div>
-  <div class="nav-caption">TECHNICAL REPORT</div>
-  <nav aria-label="Report pages"><a class="nav-link" href="index.html?v=7" ><span class="nav-icon" aria-hidden="true">⌂</span> Introduction <span class="num">01</span></a>
-<a class="nav-link" href="dataset.html?v=7" ><span class="nav-icon" aria-hidden="true">▤</span> Dataset <span class="num">02</span></a>
-<a class="nav-link" href="methodology.html?v=7" ><span class="nav-icon" aria-hidden="true">☷</span> Methodology <span class="num">03</span></a>
-<a class="nav-link active" href="results.html?v=7" aria-current="page"><span class="nav-icon" aria-hidden="true">▥</span> Results <span class="num">04</span></a>
-<a class="nav-link" href="discussion.html?v=7" ><span class="nav-icon" aria-hidden="true">◇</span> Discussion <span class="num">05</span></a>
-<a class="nav-link" href="conclusion.html?v=7" ><span class="nav-icon" aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> Conclusion <span class="num">06</span></a>
-<a class="nav-link" href="references.html?v=7" ><span class="nav-icon" aria-hidden="true">↗</span> References & Code <span class="num">07</span></a></nav>
-  <div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Week 1 · Site framework</span></div><p>Actual results will be published after processing the real dataset. No invented measurements.</p></div>
+<aside aria-hidden="false" aria-label="Report navigation" class="side" id="sidebar">
+<div class="sidebar-top">
+<a class="brand" href="index.html?v=9"><span aria-hidden="true" class="logo"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
+<button aria-label="Close navigation" class="menu-close" id="menuClose" type="button">×</button>
+</div>
+<div class="nav-caption">TECHNICAL REPORT</div>
+<nav aria-label="Report pages"><a class="nav-link" href="index.html?v=9"><span aria-hidden="true" class="nav-icon">⌂</span> Introduction <span class="num">01</span></a>
+<a class="nav-link" href="dataset.html?v=9"><span aria-hidden="true" class="nav-icon">▤</span> Dataset <span class="num">02</span></a>
+<a class="nav-link" href="methodology.html?v=9"><span aria-hidden="true" class="nav-icon">☷</span> Methodology <span class="num">03</span></a>
+<a aria-current="page" class="nav-link active" href="results.html?v=9"><span aria-hidden="true" class="nav-icon">▥</span> Results <span class="num">04</span></a>
+<a class="nav-link" href="discussion.html?v=9"><span aria-hidden="true" class="nav-icon">◇</span> Discussion <span class="num">05</span></a>
+<a class="nav-link" href="conclusion.html?v=9"><span aria-hidden="true" class="nav-icon"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> Conclusion <span class="num">06</span></a>
+<a class="nav-link" href="references.html?v=9"><span aria-hidden="true" class="nav-icon">↗</span> References &amp; Code <span class="num">07</span></a></nav>
+<div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Task 1 verified · Task 4 figures added</span></div><p>Dataset profile updated: 187,963 rows retained. Original Task 4 figures 6–7 received. Task 2 charts and Task 3 original charts are still pending.</p></div>
 </aside>
 <div class="main">
-<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button class="mobile-toggle" id="menuBtn" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS &nbsp;/&nbsp; <strong>RESULTS</strong></div></div><div class="bar-right"><span class="pill"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" target="_blank" rel="noopener noreferrer">Official dataset ↗</a></div></header>
+<header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation menu" class="mobile-toggle" id="menuBtn" type="button"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS  /  <strong>RESULTS</strong></div></div><div class="bar-right"><span class="pill"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Official dataset ↗</a></div></header>
 <main class="container" id="main-content" tabindex="-1">
 <section class="page-section" id="results">
-<div class="headline"><div><span class="overline">04 / RESULTS</span><h2>Let the measurements speak.</h2><p>Publication-ready figure slots, with units and interpretation once validated team results are ready.</p></div><span class="pill" id="figure-count">0 / 7 figures ready</span></div><div class="results-intro" role="note"><span class="status-dot"></span><div><b>Results will appear here after the team processes the real dataset.</b><p>Seven figure slots cover CPU, memory and resource imbalance. Each final chart needs a title, axis units, caption and evidence-based interpretation.</p></div></div>
-<div class="result-notice"><span aria-hidden="true"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span><div><b>Evidence-first approach.</b> The figure panels below remain empty until actual results are generated and reviewed. Uploading a local CSV to the preview does <b>not</b> turn it into a validated final-project finding. The instructor requires at least five informative figures/tables with titles, units and captions.</div></div>
+<div class="headline"><div><span class="overline">04 / RESULTS</span><h2>Let the measurements speak.</h2><p>Original submitted research figures are shown unchanged when available; unavailable figures remain clearly marked.</p></div><span class="pill" id="figure-count">2 / 7 original figures received</span></div><div class="results-intro" role="note"><span class="status-dot"></span><div><b>Team E original Figures 6–7 are available.</b><p>Task 1 has three original data tables. Task 3 statistics are available in a handover README, but Figures 4–5 have not been uploaded. Task 2 Figures 1–3 are also awaiting the responsible teammate.</p></div></div>
+<div class="result-notice"><span>✦</span><div><b>Evidence only.</b> The two visible Task 4 figures below are the exact, unedited images submitted in Member_E.zip. Other figures are placeholders until their original image files are supplied. Do not substitute website-generated demo charts for teammate results.</div></div>
 <div class="figure-grid" id="figure-grid">
 <article class="figure-card" data-figure="fig01_cpu_histogram"><div class="figure-title"><h3>CPU utilization distribution</h3><span class="fig-number">FIG. 01</span></div><div class="figure-placeholder"><span class="placeholder-icon">▥</span><b>Awaiting CPU histogram</b><span>Team C · x: CPU usage (%) · y: observations</span></div><img alt="Histogram of measured CPU utilization" class="figure-img" loading="lazy" src="assets/results/fig01_cpu_histogram.png"/><p class="figure-caption">Distribution of observed machine CPU utilization (%). Interpretation and sample scope pending.</p><span class="tag">Task 2 · CPU</span></article>
 <article class="figure-card" data-figure="fig02_cpu_time_series"><div class="figure-title"><h3>CPU utilization over time</h3><span class="fig-number">FIG. 02</span></div><div class="figure-placeholder"><span class="placeholder-icon">⌁</span><b>Awaiting CPU time-series</b><span>Team C · x: trace time (hours) · y: CPU (%)</span></div><img alt="Measured average CPU utilization over time" class="figure-img" loading="lazy" src="assets/results/fig02_cpu_time_series.png"/><p class="figure-caption">Time variation in observed CPU load. Time-window definition pending.</p><span class="tag">Task 2 · CPU</span></article>
 <article class="figure-card" data-figure="fig03_machine_comparison"><div class="figure-title"><h3>Machine-level CPU comparison</h3><span class="fig-number">FIG. 03</span></div><div class="figure-placeholder"><span class="placeholder-icon">▤</span><b>Awaiting machine comparison</b><span>Team C · x: machine IDs · y: mean CPU (%)</span></div><img alt="Comparison of measured CPU usage across machines" class="figure-img" loading="lazy" src="assets/results/fig03_machine_comparison.png"/><p class="figure-caption">Contrasting mostly idle and frequently busy machines. Selection criteria pending.</p><span class="tag">Task 2 · CPU</span></article>
 <article class="figure-card" data-figure="fig04_memory_histogram"><div class="figure-title"><h3>Memory utilization distribution</h3><span class="fig-number">FIG. 04</span></div><div class="figure-placeholder"><span class="placeholder-icon">◉</span><b>Awaiting memory chart</b><span>Team D · x: memory usage (%) · y: observations</span></div><img alt="Histogram of measured memory utilization" class="figure-img" loading="lazy" src="assets/results/fig04_memory_histogram.png"/><p class="figure-caption">Distribution of observed machine memory utilization (%). Interpretation pending.</p><span class="tag">Task 3 · Memory</span></article>
 <article class="figure-card" data-figure="fig05_cpu_memory_scatter"><div class="figure-title"><h3>CPU vs. memory usage</h3><span class="fig-number">FIG. 05</span></div><div class="figure-placeholder"><span class="placeholder-icon">⠿</span><b>Awaiting correlation scatter</b><span>Team D · x: CPU (%) · y: memory (%)</span></div><img alt="Scatter plot of measured CPU and memory utilization" class="figure-img" loading="lazy" src="assets/results/fig05_cpu_memory_scatter.png"/><p class="figure-caption">Paired CPU and memory observations, relationship and mismatches. Correlation pending.</p><span class="tag">Task 3 · Memory</span></article>
-<article class="figure-card" data-figure="fig06_imbalance_heatmap"><div class="figure-title"><h3>Machine-time utilization heatmap</h3><span class="fig-number">FIG. 06</span></div><div class="figure-placeholder"><span class="placeholder-icon">▦</span><b>Awaiting resource heatmap</b><span>Team E · x: trace time · y: machine ID</span></div><img alt="Heatmap of measured CPU utilization by machine and time" class="figure-img" loading="lazy" src="assets/results/fig06_imbalance_heatmap.png"/><p class="figure-caption">Differences in machine utilization across the observation window. Interpretation pending.</p><span class="tag">Task 4 · Imbalance</span></article>
-<article class="figure-card" data-figure="fig07_utilization_categories"><div class="figure-title"><h3>Utilization categories</h3><span class="fig-number">FIG. 07</span></div><div class="figure-placeholder"><span class="placeholder-icon">☷</span><b>Awaiting category comparison</b><span>Team E · low / medium / high (%)</span></div><img alt="Comparison of low medium and high utilization categories" class="figure-img" loading="lazy" src="assets/results/fig07_utilization_categories.png"/><p class="figure-caption">Shares of observations in pre-defined utilization categories. Threshold rationale pending.</p><span class="tag">Task 4 · Imbalance</span></article>
-</div>
+<article class="figure-card ready member-evidence" data-figure="fig06_imbalance_heatmap"><div class="figure-title"><h3>Machine-time utilization heatmap</h3><span class="fig-number">FIG. 06</span></div><div class="figure-placeholder"><span class="placeholder-icon">▦</span><b>Awaiting resource heatmap</b><span>Team E · x: trace time · y: machine ID</span></div><img alt="Original Member E CPU utilization heatmap (Figure 6)" class="figure-img" decoding="async" loading="lazy" src="assets/results/fig06_imbalance_heatmap.png"/><p class="figure-caption">Original Figure 6 (Member E). Hourly average CPU utilization (%) by machine, displayed as sorted machine rows. Warm colors indicate higher CPU usage; strong differences among rows suggest uneven observed machine loads. This figure alone does not reveal job placement or scheduling policy.</p><span class="tag">Task 4 · Imbalance</span><a class="evidence-link" href="assets/results/fig06_imbalance_heatmap.png" rel="noopener" target="_blank">Open the original PNG ↗</a></article>
+<article class="figure-card ready member-evidence" data-figure="fig07_utilization_categories"><div class="figure-title"><h3>Utilization categories</h3><span class="fig-number">FIG. 07</span></div><div class="figure-placeholder"><span class="placeholder-icon">☷</span><b>Awaiting category comparison</b><span>Team E · low / medium / high (%)</span></div><img alt="Original Member E CPU utilization category share (Figure 7)" class="figure-img" decoding="async" loading="lazy" src="assets/results/fig07_utilization_categories.png"/><p class="figure-caption">Original Figure 7 (Member E). Per-hour share of machines with observed data in three CPU utilization groups: Low &lt;20%, Mid 20–&lt;40%, High ≥40%. These are preliminary analysis thresholds. Hour 22 is only partly covered; the final bar should be interpreted cautiously.</p><span class="tag">Task 4 · Imbalance</span><a class="evidence-link" href="assets/results/fig07_utilization_categories.png" rel="noopener" target="_blank">Open the original PNG ↗</a></article>
+</div><div class="w1-section" id="task3-notes"><span class="kicker">TASK 3 / RECEIVED HANDOVER NOTES</span><h3>Memory analysis — findings received, chart files pending</h3>
+<div class="v9-kpis"><div><b>48.95%</b><span>Mean memory utilization</span></div><div><b>0.7782</b><span>Pearson r · CPU vs memory</span></div><div><b>187,962</b><span>Valid CPU–memory pairs</span></div></div>
+<p class="report-prose">Member D's README reports mean memory utilization of 48.95% (median 51.24%, population SD 13.19 percentage points), Pearson r = 0.7782 and Spearman ρ = 0.7844 across 187,962 paired records. Their analysis describes 614 low-CPU/high-memory observations (0.327%) at thresholds CPU &lt;30% and memory ≥70%. Correlation alone does not imply causality or poor service performance.</p>
+<div class="v9-note"><b>Missing original assets:</b> The supplied README refers to <code>Task3_Memory_Analysis.xlsx</code>, <code>scripts/analyze_memory.py</code>, <code>analysis_data.json</code>, and charts for Figures 4–5. These files were <strong>not</strong> included in the uploaded README; the website therefore does not recreate or claim to display those teammate images. <a download="" href="analysis/03_memory_README.md">Download original Member D README ↓</a></div></div>
 <div class="preview"><div class="preview-head"><div><span class="kicker">OPTIONAL · INTERACTIVE DATA EXPLORER</span><h3>Try a real, local CSV sample.</h3><p>Upload a small <code>server_usage.csv</code> (2017 column order). This preview runs entirely in your browser; it is not uploaded. Filter by machine and switch CPU / memory to demonstrate interactivity.</p></div><span class="pill">Preview only</span></div><div class="upload-row"><label class="btn primary" for="csv-file">Choose CSV sample ↑</label><input accept=".csv,text/csv" class="file-input" id="csv-file" type="file"/><button class="btn outline" id="clear-preview" type="button">Clear preview</button></div><div class="preview-metrics" id="preview-metrics"><span>No sample loaded</span></div><div class="chart-controls"><label class="control">Measurement <select id="metric-select"><option value="cpu">CPU utilization (%)</option><option value="memory">Memory utilization (%)</option></select></label><label class="control">Machine <select id="machine-select"><option value="all">All sample machines</option></select></label></div><div class="local-chart-box"><canvas aria-label="Local sample utilization time series" id="preview-canvas" role="img"></canvas><div class="chart-empty" id="chart-empty">Your actual sample chart will appear here after CSV import.</div></div><p class="sample-status" id="preview-status" role="status">Recommended: a headerless CSV from 2017, maximum 6 MB, first 30,000 rows analyzed for this browser preview. Do not use this preview alone as evidence of a representative sample.</p></div>
 </section>
-<nav class="page-nav" aria-label="Report page navigation"><a href="methodology.html?v=7">← Previous: Methodology</a><span style="flex:1"></span><a href="discussion.html?v=7">Next: Discussion →</a></nav>
+<nav aria-label="Report page navigation" class="page-nav"><a href="methodology.html?v=9">← Previous: Methodology</a><span style="flex:1"></span><a href="discussion.html?v=9">Next: Discussion →</a></nav>
 </main>
-<footer class="page-footer"><span><span class="little-flower"><svg class="bt-spark-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z"/></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v7</span></span></footer>
+<footer class="page-footer"><span><span class="little-flower"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v9</span></span></footer>
 </div></div>
-
 <!-- Inline navigation fallback: hamburger menu still works if the assets folder is unavailable. -->
 <script>
 (() => {
@@ -320,7 +385,7 @@ a {color:#446F98}
 })();
 </script>
 <!-- Real data metadata is optional until analysis is completed. -->
-<script src="assets/results/results.js?v=7"></script>
+<script src="assets/results/results.js?v=9"></script>
 <script>
 (() => {
 'use strict';
