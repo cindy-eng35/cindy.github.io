@@ -4,9 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<meta content="#eaf6ff" name="theme-color"/>
+<meta content="#F3F6F9" name="theme-color"/>
 <meta content="Operating Systems final project: Alibaba Cluster Trace 2017 CPU and memory analysis — Conclusion." name="description"/>
-<title>Conclusion · BlueTrace OS Resource Study</title>
+<title>Conclusion · BlueTrace · Complete Study OS Resource Study</title>
 <!-- CSS fallback: page is styled even when assets/style.css is missing or HTML is opened alone. -->
 <style>
 
@@ -273,54 +273,162 @@ a {color:#446F98}
 @media(max-width:740px){.w1-swipe-hint{display:block}}
 
 
-/* V9 original-file exhibits and supplementary findings */
+/* V10 original-file exhibits and supplementary findings */
 .member-evidence{grid-column:1 / -1}
 .member-evidence .figure-img{max-height:none;object-fit:contain;display:block}
 .member-evidence .figure-caption{font-size:12px;line-height:1.8}
 .evidence-link{display:inline-flex;margin-top:11px;font-size:12px;font-weight:700;color:var(--primary,#4d789d);text-decoration:none}
 .report-prose{font-size:13px;line-height:1.85;color:var(--muted,#617a94)}
 .report-prose + .report-prose{margin-top:10px}
-.v9-note{background:#F4F8FC;border:1px solid #DFE8F2;border-radius:15px;padding:14px 17px;margin-top:14px;font-size:12px;line-height:1.8;color:#56718d}
-.v9-note b{color:#344e6b}
-.v9-evidence-title{margin:25px 0 13px;font-size:15px;color:#2d4561}
-.v9-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
-.v9-kpis div{border:1px solid #E3ECF5;background:white;border-radius:15px;padding:15px}
-.v9-kpis b{display:block;font-size:22px;color:#40688c}
-.v9-kpis span{font-size:11px;color:#7e97ac}
-.v9-table th,.v9-table td{white-space:normal;min-width:125px}
-.v9-table td:first-child{font-weight:700}
-@media(max-width:620px){.v9-kpis{grid-template-columns:1fr 1fr}.member-evidence .figure-img{max-width:100%}}
+.v10-note{background:#F4F8FC;border:1px solid #DFE8F2;border-radius:15px;padding:14px 17px;margin-top:14px;font-size:12px;line-height:1.8;color:#56718d}
+.v10-note b{color:#344e6b}
+.v10-evidence-title{margin:25px 0 13px;font-size:15px;color:#2d4561}
+.v10-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.v10-kpis div{border:1px solid #E3ECF5;background:white;border-radius:15px;padding:15px}
+.v10-kpis b{display:block;font-size:22px;color:#40688c}
+.v10-kpis span{font-size:11px;color:#7e97ac}
+.v10-table th,.v10-table td{white-space:normal;min-width:125px}
+.v10-table td:first-child{font-weight:700}
+@media(max-width:620px){.v10-kpis{grid-template-columns:1fr 1fr}.member-evidence .figure-img{max-width:100%}}
+
+/* V10: reviewed D chart handover */
+.d-supplement{margin:19px 0 12px;border:1px solid #e0ebf4;background:#fff;border-radius:18px;padding:17px;max-width:100%}
+.d-supplement h4{font-size:14px;color:#3a5f7e;margin:1px 0 12px}
+.d-supplement figure{margin:0;max-width:100%}
+.d-supplement img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #ecf1f5;max-width:100%}
+.d-supplement figcaption{font-size:11px;color:#7e92a5;line-height:1.75;padding-top:9px}
+.figure-card[data-figure="fig04_memory_histogram"] .figure-img{background:#fff;object-fit:contain}
+.figure-card[data-figure="fig05_cpu_memory_scatter"] .figure-img{background:#fff;object-fit:contain}
+@media(max-width:700px){.d-supplement{padding:12px}.v9-kpis{grid-template-columns:1fr 1fr;gap:8px}.v9-kpis b{font-size:19px}}
+
+/* V12: one muted blue-grey website palette, original research PNGs untouched. */
+:root{--v12-ink:#2B4053;--v12-muted:#647B8E;--v12-soft:#E9EFF4;--v12-accent:#567890}
+.v12-report-outline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:18px}
+.v12-report-outline a{display:block;background:#F5F8FA;border:1px solid #E0E8EE;border-radius:12px;padding:13px 11px;text-decoration:none;color:#45647C;font-size:11px;line-height:1.6}
+.v12-report-outline a strong{display:block;font-size:11px;color:#263F53;margin-top:4px}
+.v12-summary{padding:20px;border-radius:18px;border:1px solid #DBE5ED;background:#F7FAFC;margin:20px 0}
+.v12-summary h3{margin:0 0 9px;font-size:17px;color:#304E64}
+.v12-summary p,.v12-summary li{font-size:12px;line-height:1.9;color:#536B7E}
+.v12-summary ul{padding-left:18px;margin:8px 0 0}
+.v12-source{color:#647B8E;font-size:11px;margin:9px 0}
+.figure-card.ready .figure-img{display:block!important;width:100%;height:auto;border:1px solid #E0E7EC;border-radius:10px}
+.figure-card.ready .figure-placeholder{display:none!important}
+.v12-figure-note{font-size:11px;color:#526A7B;line-height:1.75;margin-top:11px}
+.v12-index{padding:13px 16px;border-left:3px solid #7897B0;background:#F5F8FA;border-radius:4px 11px 11px 4px;margin-top:14px;color:#405C72}
+.v12-table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px}
+.v12-table th,.v12-table td{padding:11px 13px;border-bottom:1px solid #E2EAF0;text-align:left;vertical-align:top}
+.v12-table th{background:#EAF0F5;color:#304B61;font-weight:700}
+.v12-scroll{max-width:100%;overflow-x:auto;border:1px solid #E0E8EE;border-radius:13px}
+.v12-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.v12-source-links a{color:#466B86;overflow-wrap:anywhere}
+.v12-figure-key{border:1px solid #DCE7EF;background:#F5F9FC;border-radius:12px;padding:12px 15px;margin:12px 0;color:#4E697E;font-size:12px}
+@media(max-width:800px){.v12-report-outline{grid-template-columns:repeat(2,minmax(0,1fr))}.v12-two-col{grid-template-columns:1fr}}
+@media(max-width:480px){.v12-report-outline{grid-template-columns:repeat(2,minmax(0,1fr))}.v12-summary{padding:15px}.v12-report-outline a{padding:10px;font-size:10px}}
 </style>
-<link href="assets/style.css?v=9" rel="stylesheet"/>
-</head>
-<body data-page="conclusion" data-ui-version="9">
+<link href="assets/style.css?v=13" rel="stylesheet"/>
+<style>
+
+/* BlueTrace V11 — unified muted-blue interface; all source figure files untouched. */
+:root {
+  --ink:#263B51; --muted:#637B91; --soft:#F6F8FB; --white:#fff;
+  --line:#DCE5ED; --blue:#527A9E; --blue-deep:#355A7B; --blue-pale:#E9F0F6;
+  --mint:#E9F0F6; --pink:#E9F0F6;
+  --primary:#527A9E; --accent:#527A9E;
+  --shadow:0 9px 26px rgba(40,68,96,.042);
+}
+html {color-scheme:light}
+body {background:#F6F8FB;color:var(--ink)}
+a {color:#41698E}
+.side {background:linear-gradient(180deg,#F3F6F9 0%,#EFF4F8 100%);border-right:1px solid #DCE5ED}
+.bar {background:rgba(249,251,253,.96);border-bottom:1px solid #E2E9EF}
+.logo,.process-orb,.process-index,.nav-icon {color:#527A9E}
+.logo {background:linear-gradient(145deg,#DFEAF3,#EEF4F8);border-color:#D0DFEB}
+.hero,.hero-v3 {background:linear-gradient(118deg,#F1F5F9 0%,#E6EEF5 52%,#D9E6F1 100%);border:1px solid #D8E4EE;box-shadow:0 8px 27px rgba(48,76,103,.045)}
+.hero-v3:before,.hero:before {filter:saturate(.35)}
+.hero h1 em,.hero-v3 h1 em,.hero h1 span,.hero-v3 h1 span {color:#577FA4}
+.primary,.btn-primary,.button-primary,.btn.main,.actions a.primary {background:#527A9E;color:#fff;border-color:#527A9E}
+.primary:hover,.btn-primary:hover,.button-primary:hover,.actions a.primary:hover {background:#426889;color:#fff}
+.nav-link:hover {background:#E6EEF5;color:#355A7B}
+.nav-link.active,.nav-link[aria-current="page"] {background:#DDE9F3;color:#315B82}
+.card,.figure-card,.preview,.w1-section,.stat,.task,.week {border-color:#E0E8EF;box-shadow:0 7px 22px rgba(48,76,103,.036)}
+.card,.figure-card,.preview {background:#fff}
+.kicker,.overline,.nav-caption,.fig-number,.process-top {color:#5A7C9B}
+.pill,.tag,.badge {background:#EBF1F6;color:#456D92;border-color:#D9E5EE}
+.status-dot,.dot {background:#7295B5;box-shadow:0 0 0 4px #E6EEF5}
+.result-notice,.results-intro,.w1-callout,.v9-note {background:#F2F6F9;border-color:#DEE8F0;color:#4F6A83}
+.result-notice b,.results-intro b,.w1-callout b {color:#2E526F}
+.w1-statbar .w1-stat,.v10-kpis>div,.v9-kpis>div {background:#fff;border-color:#E0E8EF}
+.w1-statbar b,.v10-kpis b,.v9-kpis b {color:#365F82}
+.w1-table thead,.schema thead {background:#ECF2F7}
+.w1-table tr:nth-child(even),.schema tr:nth-child(even) {background:#FAFBFD}
+.page-nav a {border-color:#DCE5ED;background:#fff;color:#456C8E}
+.page-nav a:hover {background:#EAF1F7}
+.scrim {background:rgba(28,48,69,.42)}
+.figure-card.ready .figure-img {display:block!important;width:100%;height:auto;max-width:100%;border:1px solid #E4EAF0;border-radius:12px;background:#fff}
+.figure-card.ready .figure-placeholder {display:none!important}
+.w1-evidence figure img {display:block!important;width:100%;max-width:100%;height:auto;border-radius:10px}
+.d-supplement img {display:block!important;width:100%;max-width:100%;height:auto}
+.fig-number,.figure-title h3 {color:#35546F}
+.fig-number {letter-spacing:.5px}
+.figure-card .figure-caption {color:#607589}
+.bt-image-note {font-size:12px;color:#61798F;margin:8px 0 16px;line-height:1.8}
+.bt-pending {margin:25px 0 4px;border:1px solid #DEE7EF;border-radius:17px;background:#F4F7FA;padding:13px 16px}
+.bt-pending summary {cursor:pointer;color:#3F6280;font-size:13px;font-weight:750;list-style-position:outside;padding:6px 4px}
+.bt-pending[open] summary {margin-bottom:14px}
+.bt-pending .figure-grid {margin-top:12px}
+.bt-pending .figure-card {box-shadow:none;background:#FAFBFD}
+.bt-visible-intro {margin:0 0 20px;padding:12px 17px;background:#EFF4F8;border:1px solid #DCE7F0;border-radius:14px;font-size:13px;color:#496983}
+.bt-visible-intro strong {color:#284C6C}
+.bt-photo-section {scroll-margin-top:84px}
+.bt-photo-section .w1-evidence {margin-top:14px}
+@media(max-width:680px){
+ .hero,.hero-v3 {background:linear-gradient(140deg,#F1F5F9,#DDE9F3)}
+ .figure-card {padding:14px}
+ .bt-pending{padding:12px}
+}
+</style>
+<style id="instructor-audit-v13">.side nav[aria-label="Instructor report outline"]{display:flex;flex-direction:column;gap:3px}.side nav[aria-label="Instructor report outline"] .nav-link{min-height:38px;padding-top:8px;padding-bottom:8px;font-size:12px;line-height:1.25}.side .side-bottom{position:static;margin-top:20px}.v12-summary{scroll-margin-top:78px}#what-we-learned,#conclusion,#research-questions,#reproduce,#references,#task4-transitions{scroll-margin-top:92px}.v12-summary ol{padding-left:22px;line-height:1.9;color:#52677d}.v12-summary ol li{margin-bottom:8px}.v12-table caption{text-align:left;padding:8px 0;color:#667f92}.nav-link .num{font-variant-numeric:tabular-nums}@media(max-width:900px){.side nav[aria-label="Instructor report outline"] .nav-link{font-size:13px;min-height:41px}}
+</style></head>
+<body data-page="conclusion" data-ui-version="11">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <div aria-hidden="true" class="scrim" id="scrim"></div>
 <div class="app">
 <aside aria-hidden="false" aria-label="Report navigation" class="side" id="sidebar">
 <div class="sidebar-top">
-<a class="brand" href="index.html?v=9"><span aria-hidden="true" class="logo"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
+<a class="brand" href="index.html?v=13"><span aria-hidden="true" class="logo"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span><span><strong>BlueTrace</strong><small>AN OS RESOURCE STUDY</small></span></a>
 <button aria-label="Close navigation" class="menu-close" id="menuClose" type="button">×</button>
 </div>
-<div class="nav-caption">TECHNICAL REPORT</div>
-<nav aria-label="Report pages"><a class="nav-link" href="index.html?v=9"><span aria-hidden="true" class="nav-icon">⌂</span> Introduction <span class="num">01</span></a>
-<a class="nav-link" href="dataset.html?v=9"><span aria-hidden="true" class="nav-icon">▤</span> Dataset <span class="num">02</span></a>
-<a class="nav-link" href="methodology.html?v=9"><span aria-hidden="true" class="nav-icon">☷</span> Methodology <span class="num">03</span></a>
-<a class="nav-link" href="results.html?v=9"><span aria-hidden="true" class="nav-icon">▥</span> Results <span class="num">04</span></a>
-<a class="nav-link" href="discussion.html?v=9"><span aria-hidden="true" class="nav-icon">◇</span> Discussion <span class="num">05</span></a>
-<a aria-current="page" class="nav-link active" href="conclusion.html?v=9"><span aria-hidden="true" class="nav-icon"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> Conclusion <span class="num">06</span></a>
-<a class="nav-link" href="references.html?v=9"><span aria-hidden="true" class="nav-icon">↗</span> References &amp; Code <span class="num">07</span></a></nav>
-<div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Task 1 verified · Task 4 figures added</span></div><p>Dataset profile updated: 187,963 rows retained. Original Task 4 figures 6–7 received. Task 2 charts and Task 3 original charts are still pending.</p></div>
+<div class="nav-caption">REPORT OUTLINE · 10 SECTIONS</div>
+<nav aria-label="Instructor report outline"><a class="nav-link" href="index.html?v=13#introduction"><span aria-hidden="true" class="nav-icon">⌂</span> Overview <span class="num">01</span></a>
+<a class="nav-link" href="index.html?v=13#research-questions"><span aria-hidden="true" class="nav-icon">?</span> Research questions <span class="num">02</span></a>
+<a class="nav-link" href="dataset.html?v=13#dataset"><span aria-hidden="true" class="nav-icon">▤</span> Dataset <span class="num">03</span></a>
+<a class="nav-link" href="methodology.html?v=13#methodology"><span aria-hidden="true" class="nav-icon">☷</span> Methodology <span class="num">04</span></a>
+<a class="nav-link" href="results.html?v=13#results"><span aria-hidden="true" class="nav-icon">▥</span> Results &amp; figures <span class="num">05</span></a>
+<a class="nav-link" href="discussion.html?v=13#discussion"><span aria-hidden="true" class="nav-icon">◇</span> Discussion <span class="num">06</span></a>
+<a aria-current="page" class="nav-link active" href="conclusion.html?v=13#what-we-learned"><span aria-hidden="true" class="nav-icon">✦</span> What we learned <span class="num">07</span></a>
+<a aria-current="page" class="nav-link active" href="conclusion.html?v=13#conclusion"><span aria-hidden="true" class="nav-icon">✧</span> Conclusion <span class="num">08</span></a>
+<a class="nav-link" href="references.html?v=13#reproduce"><span aria-hidden="true" class="nav-icon">↻</span> Reproduce <span class="num">09</span></a>
+<a class="nav-link" href="references.html?v=13#references"><span aria-hidden="true" class="nav-icon">↗</span> References <span class="num">10</span></a></nav>
+<div class="side-bottom"><b>PROJECT STATUS</b><div class="tiny-status"><span class="dot"></span><span id="progress-label">Four analyses integrated · final review</span></div><p>Tasks 1–4, original figures, findings and reproducibility files are included. Final team review and presentation are still required.</p></div>
 </aside>
 <div class="main">
 <header class="bar"><div class="bar-lead" style="display:flex;align-items:center;gap:11px;min-width:0"><button aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation menu" class="mobile-toggle" id="menuBtn" type="button"><span aria-hidden="true">☰</span></button><div class="breadcrumbs">OPERATING SYSTEMS  /  <strong>CONCLUSION</strong></div></div><div class="bar-right"><span class="pill"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg> Academic project</span><a class="external" href="https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2017" rel="noopener noreferrer" target="_blank">Official dataset ↗</a></div></header>
 <main class="container" id="main-content" tabindex="-1">
-<section class="page-section" id="conclusion">
-<div class="headline"><div><span class="overline">06 / CONCLUSION</span><h2>What did we learn?</h2><p>Task 1 completed and original Task 4 figures received. Final synthesis will follow remaining team results.</p></div></div><div class="conclusion-box"><span class="kicker">FINAL CONCLUSION · PENDING RESULTS</span><h3>Explain resource demand with evidence.</h3><p id="conclusion-text">The dataset examination established 187,963 retained observations across 1,310 machines, with 187,962 valid CPU–memory pairs. Original Task 4 figures provide preliminary evidence of uneven machine CPU utilization; Member D has supplied correlation findings in README form. A complete synthesis still depends on Team C CPU figures, Team D original charts, final interpretation and reviewed reproducibility steps.</p><div class="conclusion-items"><div><span>LESSON 01</span>Quantify variability across machines and time.</div><div><span>LESSON 02</span>Interpret CPU and memory demand together.</div><div><span>LESSON 03</span>Distinguish utilization, scheduling and performance.</div></div></div>
-</section>
-<nav aria-label="Report page navigation" class="page-nav"><a href="discussion.html?v=9">← Previous: Discussion</a><span style="flex:1"></span><a href="references.html?v=9">Next: References &amp; Code →</a></nav>
+<section class="page-section" id="lessons-and-conclusion"><div class="headline"><div><span class="overline">07 / WHAT WE LEARNED · 08 / CONCLUSION</span><h2>Evidence first. Interpretation second.</h2><p>Four research tasks, three quantitative comparisons, a documented trace and reproducible figures.</p></div></div>
+<section class="v12-summary" id="what-we-learned"><span class="kicker">07 / LESSONS</span><h3>What we learned</h3>
+<ol><li><strong>Preserve raw-to-processed traceability.</strong> All 187,963 observations are retained; analyses needing valid CPU–memory pairs use 187,962 observations.</li>
+<li><strong>Use the correct unit of analysis.</strong> Individual machine-time observations, per-machine means and hourly aggregates answer different questions.</li>
+<li><strong>Make thresholds transparent.</strong> Team D’s mismatch rule (&lt;30%, ≥70%) and Team E’s CPU categories (&lt;20%, 20–&lt;40%, ≥40%) serve different analyses.</li>
+<li><strong>Measure changes, not assumed causes.</strong> A 300-second transition comparison finds 18.37% category changes; neither this nor a heatmap identifies scheduler decisions.</li>
+<li><strong>Do not equate utilization with performance.</strong> The trace lacks application latency, page-fault metrics, task placement and user-perceived response times.</li></ol></section>
+<section class="v12-summary" id="conclusion"><span class="kicker">08 / CONCLUSION</span><h3>Main findings and technical conclusions</h3>
+<p>The Alibaba Cluster Trace 2017 <code>server_usage.csv</code> subset contains <strong>187,963</strong> observations across <strong>1,310</strong> machines during an 11.92-hour observation window. CPU utilization averages <strong>26.47%</strong> and memory utilization <strong>48.95%</strong>. Across <strong>187,962</strong> complete CPU–memory pairs, Pearson <em>r</em> is <strong>0.7782</strong>; the association is positive but does not imply causality.</p>
+<p>Figures 1–3 show CPU distribution, time patterns and selected-machine differences. Figures 4–5 show memory utilization and CPU–memory coupling. Figures 6–7 and Table 4 describe variation in CPU demand across machines, hours and consecutive observations. The results motivate resource-allocation investigation, but <strong>cannot prove scheduler inefficiency or application slowdown</strong> without task-placement, latency and other performance evidence.</p>
+<p><strong>Research limitation:</strong> this is a historical, partly sampled machine-level trace; within-machine reporting gaps and the final incomplete hourly interval limit temporal interpretations. Team E thresholds are descriptive, not operational warning standards.</p>
+<p>See <a href="references.html?v=13#reproduce">Reproducibility</a> for the original source and executable analysis materials.</p></section></section>
+<nav aria-label="Report page navigation" class="page-nav"><a href="discussion.html?v=13">← Previous: Discussion</a><span style="flex:1"></span><a href="references.html?v=13">Next: References &amp; Code →</a></nav>
 </main>
-<footer class="page-footer"><span><span class="little-flower"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v9</span></span></footer>
+<footer class="page-footer"><span><span class="little-flower"><svg aria-hidden="true" class="bt-spark-icon" focusable="false" viewbox="0 0 24 24"><path d="M12 1.5C12 7.35 16.65 12 22.5 12C16.65 12 12 16.65 12 22.5C12 16.65 7.35 12 1.5 12C7.35 12 12 7.35 12 1.5Z" fill="currentColor"></path></svg></span> BlueTrace · Operating Systems Final Project</span><span>Designed for clarity · Validated with evidence, not assumptions. <span class="build-tag">v13</span></span></footer>
 </div></div>
 <!-- Inline navigation fallback: hamburger menu still works if the assets folder is unavailable. -->
 <script>
@@ -371,7 +479,7 @@ a {color:#446F98}
 })();
 </script>
 <!-- Real data metadata is optional until analysis is completed. -->
-<script src="assets/results/results.js?v=9"></script>
+<script src="assets/results/results.js?v=13"></script>
 <script>
 (() => {
 'use strict';
